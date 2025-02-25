@@ -185,6 +185,12 @@
 				]
 			}
 		},
+		"firstseenbysource": {
+			"simple": "Domain.FirstSeenBySource"
+		},
+		"globalprevalence": {
+			"simple": "Domain.GlobalPrevalence"
+		},
 		"internal": {
 			"complex": {
 				"accessor": "Internal",
@@ -196,6 +202,9 @@
 					}
 				]
 			}
+		},
+		"lastseenbysource": {
+			"simple": "Domain.LastSeenBySource"
 		},
 		"malwarefamily": {
 			"complex": {
@@ -232,6 +241,15 @@
 					}
 				]
 			}
+		},
+		"organizationfirstseen": {
+			"simple": "Domain.OrganizationFirstSeen"
+		},
+		"organizationlastseen": {
+			"simple": "Domain.OrganizationLastSeen"
+		},
+		"organizationprevalence": {
+			"simple": "Domain.OrganizationPrevalence"
 		},
 		"positivedetections": {
 			"complex": {
@@ -453,7 +471,7 @@
 	"formatScript": "ExtractDomainAndFQDNFromUrlAndEmail",
 	"fromServerVersion": "5.5.0",
 	"id": "domainRepUnified",
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"layout": "domainRepUnified",
 	"legacyNames": null,
 	"locked": false,
@@ -464,6 +482,7 @@
 	"packPropagationLabels": [
 		"all"
 	],
+	"propagationLabels": [],
 	"regex": "(?i)(?P\u003cscheme\u003e(?:http|ftp|hxxp)s?(?:://|-3A__|%3A%2F%2F))?(?:%[\\da-f][\\da-f])?(?P\u003cdomain\u003e(?:[\\p{L}\\d\\-–]+(?:\\.|\\[\\.\\]))+[\\p{L}]{2,})(@|%40)?(?:\\b| |[[:punct:]]|$)",
 	"reputationCommand": "domain",
 	"reputationScriptName": "",
