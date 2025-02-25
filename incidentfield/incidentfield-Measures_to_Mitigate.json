@@ -26,7 +26,7 @@
 	"id": "incident_measurestomitigate",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.15.56",
+	"itemVersion": "1.19.28",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Measures to Mitigate",
@@ -40,7 +40,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Measures to Mitigate",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
