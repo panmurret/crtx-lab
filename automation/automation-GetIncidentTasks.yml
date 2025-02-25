@@ -20,7 +20,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.10.0
-    itemVersion: 1.3.58
+    itemVersion: 1.3.66
     packID: DemistoRESTAPI
     packName: Cortex REST API
     packPropagationLabels:
@@ -28,13 +28,13 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.86272
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: GetIncidentTasks
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 outputs:
 - contextPath: Tasks
@@ -78,7 +78,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('GetIncidentTasks', 'start', __line__())
-  ### pack version: 1.3.58
+  demisto.debug('pack name = Cortex REST API, pack version = 1.3.66')
 
 
 
