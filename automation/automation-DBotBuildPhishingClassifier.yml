@@ -107,7 +107,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.34.37
+    itemVersion: 1.39.20
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -115,19 +115,19 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.11.9.101916
+dockerimage: demisto/python3:3.11.10.113941
 engineinfo: {}
 mainengineinfo: {}
 name: DBotBuildPhishingClassifier
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('DBotBuildPhishingClassifier', 'start', __line__())
-  demisto.debug('pack name = Base, pack version = 1.34.37')
+  demisto.debug('pack name = Base, pack version = 1.39.20')
 
   import base64
   import gc
