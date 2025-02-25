@@ -1,0 +1,36 @@
+category: Messaging
+commonfields:
+  id: mail-sender
+  version: -1
+configuration:
+- display: Mail server hostname or IP address
+  name: MailServerURL
+  required: true
+  type: 0
+- defaultvalue: "25"
+  display: SMTP Port
+  name: smtpPort
+  required: true
+  type: 1
+- display: ""
+  name: Credentials
+  required: false
+  type: 9
+- display: Sender address
+  name: from
+  required: true
+  type: 0
+- display: Use TLS for connection
+  name: tls
+  required: false
+  type: 8
+- display: Do not validate server certificate (insecure)
+  name: insecure
+  required: false
+  type: 8
+description: Send email notifications to users
+display: Mail Sender
+icon: mail-sender.png
+ispasswordprotected: true
+name: mail-sender
+script: null
