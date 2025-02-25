@@ -1,0 +1,112 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Email"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"casefield": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Email",
+				"commands": [
+					{
+						"description": "Send an email.",
+						"name": "send-mail"
+					}
+				],
+				"description": "Send emails implemented in Python with embedded image support.",
+				"id": "Mail Sender (New)",
+				"name": "Mail Sender (New)"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"created": "2020-07-23T13:15:24Z",
+	"currentVersion": "1.0.28",
+	"defaultDataSource": {
+		"id": "",
+		"name": ""
+	},
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.39.13",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "Send emails implemented in Python with embedded image support",
+	"downloads": 19084,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"hybrid": false,
+	"id": "MailSenderNew",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/MailSenderNew/MailSender%28New%29_image.png",
+			"name": "Mail Sender (New)"
+		}
+	],
+	"itemVersion": "1.0.28",
+	"keywords": [],
+	"legacy": true,
+	"modules": [],
+	"name": "Mail Sender (New)",
+	"packID": "MailSenderNew",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2025-01-13T20:25:11Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "1977897",
+	"videos": []
+}
