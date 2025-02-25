@@ -13,7 +13,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -21,19 +21,19 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.86272
+dockerimage: demisto/python3:3.11.10.116949
 engineinfo: {}
 mainengineinfo: {}
 name: RemoveKeyFromList
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('RemoveKeyFromList', 'start', __line__())
-  demisto.debug('pack name = Common Scripts, pack version = 1.15.56')
+  demisto.debug('pack name = Common Scripts, pack version = 1.19.28')
 
 
   """RemoveKeyFromList
@@ -42,7 +42,7 @@ script: |
 
 
 
-  from typing import Dict, Any
+  from typing import Any
   import traceback
 
 
@@ -59,7 +59,7 @@ script: |
       ):
           raise ValueError(f'Cannot retrieve list {list_name}')
 
-      list_data: Dict = {}
+      list_data: dict = {}
       data: str = res[0]['Contents']
       if data and len(data) > 0:
           try:
@@ -78,7 +78,7 @@ script: |
   ''' COMMAND FUNCTION '''
 
 
-  def remove_key_from_list_command(args: Dict[str, Any]) -> CommandResults:
+  def remove_key_from_list_command(args: dict[str, Any]) -> CommandResults:
 
       list_name = args.get('listName', None)
       if not list_name:
