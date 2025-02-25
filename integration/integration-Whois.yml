@@ -78,7 +78,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.5.16
+    itemVersion: 1.5.23
     packID: Whois
     packName: Whois
     packPropagationLabels:
@@ -1490,14 +1490,14 @@ script:
     - contextPath: DBotScore.Reliability
       description: Reliability of the source providing the intelligence data.
       type: String
-  dockerimage: demisto/ippysocks-py3:1.0.0.102706
+  dockerimage: demisto/ippysocks-py3:1.0.0.117488
   nativeimage:
-  - "8.7"
+  - "8.8"
   - "8.6"
   runonce: false
   script: |
     register_module_line('Whois', 'start', __line__())
-    demisto.debug('pack name = Whois, pack version = 1.5.16')
+    demisto.debug('pack name = Whois, pack version = 1.5.23')
 
 
 
@@ -8716,6 +8716,7 @@ script:
 
     def get_whois_raw(domain, server="", previous=None, never_cut=False, with_server_list=False,
                       server_list=None, is_recursive=True):
+        new_list = []
         previous = previous or []
         server_list = server_list or []
         # Sometimes IANA simply won't give us the right root WHOIS server
@@ -9618,7 +9619,7 @@ script:
                         hour = 0
                         minute = 0
                         second = 0
-                        demisto.debug(e)
+                        demisto.debug(f'{e}')
             try:
                 if year > 0:
                     if month > 12:
@@ -9835,11 +9836,18 @@ script:
 
     # Drops the mic disable-secrets-detection-end
 
-    def get_domain_from_query(query):
+    def get_domain_from_query(query: str):
 
         demisto.debug(f"Attempting to get domain from query '{query}'...")
 
         try:
+            # remove everything after the first appearance of one of "/", "?" or "#"
+            idx_to_split = min(
+                i for i in [query.find("#"), query.find("?"), query.replace("://", ":$$").find("/"), len(query)]
+                if i > -1
+            )
+            query = query[:idx_to_split]
+
             # checks for largest matching suffix inside tlds dictionary
             suffix_len = max([len(suffix) for suffix in tlds if query.endswith('.{}'.format(suffix))] or [0])
             # if suffix(TLD) was found increase the length by one in order to add the dot before it. --> .com instead of com
@@ -9967,7 +9975,7 @@ script:
                 'asn': response.get('asn'),
                 'asn_cidr': response.get('asn_cidr'),
                 'asn_date': response.get('asn_date'),
-                'country_code': network_data.get('country'),
+                'country_code': response.get('asn_country_code'),
                 'network_name': network_data.get('name')
                 }
 
