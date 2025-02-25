@@ -10,7 +10,7 @@
 	"incidentSamples": null,
 	"indicatorSamples": null,
 	"instanceIds": null,
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"keyTypeMap": {
 		"mail-listener": "Phishing"
 	},
