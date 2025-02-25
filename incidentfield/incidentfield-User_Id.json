@@ -7,7 +7,8 @@
 	"associatedTypes": [
 		"IAM - App Add",
 		"IAM - App Remove",
-		"IAM - Group Membership Update"
+		"IAM - Group Membership Update",
+		"CrowdStrike Falcon OFP Detection"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -28,7 +29,7 @@
 	"id": "incident_userid",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "User Id",
@@ -42,7 +43,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "User Id",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
@@ -51,7 +52,9 @@
 	"selectValuesMap": null,
 	"sla": 0,
 	"system": false,
-	"systemAssociatedTypes": null,
+	"systemAssociatedTypes": [
+		"CrowdStrike Falcon OFP Detection"
+	],
 	"template": "",
 	"threshold": 72,
 	"toServerVersion": "",
