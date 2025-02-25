@@ -8,7 +8,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.8.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -16,20 +16,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: ShowIncidentIndicators
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ShowIncidentIndicators', 'start', __line__())
-  demisto.debug('pack name = Common Scripts, pack version = 1.15.56')
+  demisto.debug('pack name = Common Scripts, pack version = 1.19.28')
 
 
 
@@ -43,7 +43,12 @@ script: |
       """
 
       grouped = {}
-      for indicator in indicators:
+      if indicators and 'Contents' in indicators[0]:
+          indicators_res: dict = indicators[0]['Contents']
+      else:
+          indicators_res = {}
+
+      for indicator in indicators_res:
           if indicator['indicator_type'] not in grouped:
               grouped[indicator['indicator_type']] = [indicator['value']]
           else:
@@ -62,16 +67,12 @@ script: |
           List of the indicators from the incident.
       """
       incident_id = demisto.incident()['id']
-      indicators_query = {
-          "investigationIDs": incident_id
-      }
-
-      find_indicators_args = {'query': indicators_query}
-      all_indicator_data = execute_command('findIndicators', args=find_indicators_args)
+      indicators_query = "investigationIDs:" + str(incident_id)
+      all_indicator_data = demisto.executeCommand('findIndicators', {'query': indicators_query, 'size': 200})
       return {"hidden": False, "options": group_by_type(all_indicator_data)}
 
 
-  def main():
+  def main():  # pragma: no cover
       return_results(get_indicators_from_incident())
 
 
