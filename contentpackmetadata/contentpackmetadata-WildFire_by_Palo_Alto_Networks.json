@@ -26,50 +26,6 @@
 				"category": "Forensics \u0026 Malware Analysis",
 				"commands": [
 					{
-						"description": "Get web artifacts for a URL webpage. An empty tgz will be returned, no matter what the verdict is, or even if the URL is malformed.",
-						"name": "wildfire-get-url-webartifacts"
-					},
-					{
-						"description": "Returns a verdict for a hash.",
-						"name": "wildfire-get-verdict"
-					},
-					{
-						"description": "Uploads the URL of a remote file to WildFire for analysis.",
-						"name": "wildfire-upload-file-url"
-					},
-					{
-						"description": "Retrieve results for a file hash using WildFire.",
-						"name": "file"
-					},
-					{
-						"description": "Retrieves a sample.",
-						"name": "wildfire-get-sample"
-					},
-					{
-						"description": "Returns a verdict regarding multiple hashes, stored in a TXT file or given as a list.",
-						"name": "wildfire-get-verdicts"
-					},
-					{
-						"description": "Uploads a file to WildFire for analysis.",
-						"name": "wildfire-upload"
-					},
-					{
-						"description": "Uploads a URL of a webpage to WildFire for analysis.",
-						"name": "wildfire-upload-url"
-					},
-					{
-						"description": "Retrieves results for a file hash using WildFire.",
-						"name": "wildfire-report"
-					}
-				],
-				"description": "Perform malware dynamic analysis.",
-				"id": "WildFire-v2",
-				"name": "Palo Alto Networks WildFire v2"
-			},
-			{
-				"category": "Forensics \u0026 Malware Analysis",
-				"commands": [
-					{
 						"description": "Retrieves results for a file hash using WildFire.",
 						"name": "internal-wildfire-get-report"
 					}
@@ -77,18 +33,62 @@
 				"description": "Generates a Palo Alto Networks WildFire PDF report. For internal use with the TIM Sample Analysis feature.",
 				"id": "WildFire-Reports",
 				"name": "Palo Alto Networks WildFire Reports"
+			},
+			{
+				"category": "Forensics \u0026 Malware Analysis",
+				"commands": [
+					{
+						"description": "Retrieves results for a file hash using WildFire.",
+						"name": "wildfire-report"
+					},
+					{
+						"description": "Uploads a URL of a webpage to WildFire for analysis.",
+						"name": "wildfire-upload-url"
+					},
+					{
+						"description": "Uploads a file to WildFire for analysis.",
+						"name": "wildfire-upload"
+					},
+					{
+						"description": "Returns a verdict for a hash.",
+						"name": "wildfire-get-verdict"
+					},
+					{
+						"description": "Get web artifacts for a URL webpage. An empty tgz will be returned, no matter what the verdict is, or even if the URL is malformed.",
+						"name": "wildfire-get-url-webartifacts"
+					},
+					{
+						"description": "Retrieve results for a file hash using WildFire.",
+						"name": "file"
+					},
+					{
+						"description": "Uploads the URL of a remote file to WildFire for analysis.",
+						"name": "wildfire-upload-file-url"
+					},
+					{
+						"description": "Returns a verdict regarding multiple hashes, stored in a TXT file or given as a list.",
+						"name": "wildfire-get-verdicts"
+					},
+					{
+						"description": "Retrieves a sample.",
+						"name": "wildfire-get-sample"
+					}
+				],
+				"description": "Perform malware dynamic analysis.",
+				"id": "WildFire-v2",
+				"name": "Palo Alto Networks WildFire v2"
 			}
 		],
 		"layoutscontainer": null,
 		"list": null,
 		"playbook": [
 			{
-				"description": "Detonate one or more files using the Wildfire v2 integration. This playbook\nreturns relevant reports to the War Room and file reputations to the context data.\nThe detonation supports the following file types -\nAPK, JAR, DOC, DOCX, RTF, XLS, XLSX, PPT, PPTX, OOXML, PE32, PE, PDF, DMG, PKG, RAR, 7Z, JS, ELF, HTA, LNK, VBS, PS1, PERL, PYTHON, SHELL.\n\nNote: Base64 encoded files are currently not supported.",
-				"name": "WildFire - Detonate file v2"
-			},
-			{
 				"description": "Deprecated. Use Detonate URL - WildFire v2.2 instead.",
 				"name": "Detonate URL - WildFire v2.1"
+			},
+			{
+				"description": "This playbook uploads, detonates, and analyzes files for the Wildfire sandbox.\n",
+				"name": "Wildfire Detonate and Analyze File"
 			},
 			{
 				"description": "Detonate one or more files using the Wildfire v2 integration. This playbook returns relevant reports to the War Room and file reputations to the context data.\nThe detonation supports the following file types -\nAPK, JAR, DOC, DOCX, RTF, XLS, XLSX, PPT, PPTX, XML, PE32, PDF, DMG, PKG, RAR, 7Z.",
@@ -99,8 +99,12 @@
 				"name": "Detonate URL - WildFire v2.2"
 			},
 			{
-				"description": "This playbook uploads, detonates, and analyzes files for the Wildfire sandbox.\n",
-				"name": "Wildfire Detonate and Analyze File"
+				"description": "Deprecated. Use Detonate File From URL - WildFire v2 instead.",
+				"name": "Detonate File From URL - WildFire"
+			},
+			{
+				"description": "Detonate one or more files using the Wildfire v2 integration. This playbook\nreturns relevant reports to the War Room and file reputations to the context data.\nThe detonation supports the following file types -\nAPK, JAR, DOC, DOCX, RTF, XLS, XLSX, PPT, PPTX, OOXML, PE32, PE, PDF, DMG, PKG, RAR, 7Z, JS, ELF, HTA, LNK, VBS, PS1, PERL, PYTHON, SHELL.\n\nNote: Base64 encoded files are currently not supported.",
+				"name": "WildFire - Detonate file v2"
 			},
 			{
 				"description": "Deprecated. Use WildFire - Detonate file v2 instead.",
@@ -109,10 +113,6 @@
 			{
 				"description": "Deprecated. Use Detonate URL - WildFire v2.2 instead.",
 				"name": "Detonate URL - WildFire-v2"
-			},
-			{
-				"description": "Deprecated. Use Detonate File From URL - WildFire v2 instead.",
-				"name": "Detonate File From URL - WildFire"
 			}
 		],
 		"report": null,
@@ -121,7 +121,7 @@
 		"wizard": null
 	},
 	"created": "2020-06-30T20:31:37Z",
-	"currentVersion": "2.1.50",
+	"currentVersion": "2.1.56",
 	"defaultDataSource": {
 		"id": "",
 		"name": ""
@@ -132,34 +132,34 @@
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.34.34",
+			"minVersion": "1.39.18",
 			"name": "Base"
 		},
 		"CommonPlaybooks": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "2.6.37",
+			"minVersion": "2.6.50",
 			"name": "Common Playbooks"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.15.53",
+			"minVersion": "1.19.11",
 			"name": "Common Scripts"
 		},
 		"FiltersAndTransformers": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.2.76",
+			"minVersion": "1.2.88",
 			"name": "Filters And Transformers"
 		}
 	},
 	"deprecated": false,
 	"description": "Perform malware dynamic analysis",
-	"downloads": 38355,
+	"downloads": 41195,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -181,7 +181,7 @@
 			"name": "Palo Alto Networks WildFire v2"
 		}
 	],
-	"itemVersion": "2.1.50",
+	"itemVersion": "2.1.56",
 	"keywords": [],
 	"legacy": true,
 	"modules": [],
@@ -210,9 +210,9 @@
 		"Palo Alto Networks Products"
 	],
 	"toServerVersion": "",
-	"updated": "2024-08-21T12:59:38Z",
+	"updated": "2025-01-22T22:25:44Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "1294770",
+	"versionInfo": "2040490",
 	"videos": []
 }
