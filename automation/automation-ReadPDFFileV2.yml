@@ -25,7 +25,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -33,13 +33,13 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/readpdf:1.0.0.98214
+dockerimage: demisto/readpdf:1.0.0.2034953
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: ReadPDFFileV2
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 outputs:
 - contextPath: Hashes.type
@@ -147,7 +147,7 @@ runas: DBotRole
 runonce: false
 script: |
   register_module_line('ReadPDFFileV2', 'start', __line__())
-  demisto.debug('pack name = Common Scripts, pack version = 1.15.56')
+  demisto.debug('pack name = Common Scripts, pack version = 1.19.28')
 
 
 
@@ -608,6 +608,8 @@ script: |
           extracted_object = extract_url_from_annot_object(annot_object)
           # Separates URLs and Emails:
           if extracted_object:
+              if isinstance(extracted_object, bytes):
+                  extracted_object = extracted_object.decode()
               if url := extract_url(extracted_object):
                   urls.add(url)
               if email := extract_email(extracted_object):
