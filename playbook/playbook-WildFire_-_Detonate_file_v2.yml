@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.10.0
-    itemVersion: 2.1.50
+    itemVersion: 2.1.56
     packID: Palo_Alto_Networks_WildFire
     packName: WildFire by Palo Alto Networks
     packPropagationLabels:
@@ -33,14 +33,14 @@ inputs:
   playbookInputQuery: null
   required: false
   value:
-    simple: "1"
+    simple: "60"
 - description: The duration after which to stop polling and to resume the playbook.
     (in seconds)
   key: Timeout
   playbookInputQuery: null
   required: false
   value:
-    simple: "8"
+    simple: "480"
 - description: The resource type to download.
   key: ReportFileType
   playbookInputQuery: null
