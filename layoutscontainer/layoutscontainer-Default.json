@@ -3363,6 +3363,12 @@
 				"id": "workPlan",
 				"name": "Work Plan",
 				"type": "workPlan"
+			},
+			{
+				"hidden": false,
+				"id": "canvas",
+				"name": "Canvas",
+				"type": "canvas"
 			}
 		]
 	},
@@ -4193,7 +4199,7 @@
 	"id": "Default",
 	"indicatorsDetails": null,
 	"indicatorsQuickView": null,
-	"itemVersion": "2.0.11",
+	"itemVersion": "2.0.12",
 	"locked": false,
 	"mobile": null,
 	"name": "Default",
