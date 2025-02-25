@@ -17,7 +17,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.77
+    itemVersion: 1.2.89
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -25,20 +25,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: PadZeros
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('PadZeros', 'start', __line__())
-  demisto.debug('pack name = Filters And Transformers, pack version = 1.2.77')
+  demisto.debug('pack name = Filters And Transformers, pack version = 1.2.89')
 
 
 
