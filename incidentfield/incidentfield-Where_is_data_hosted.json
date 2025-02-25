@@ -26,7 +26,7 @@
 	"id": "incident_whereisdatahosted",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.15.56",
+	"itemVersion": "1.19.28",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Where is data hosted",
@@ -40,7 +40,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Where is data hosted",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
