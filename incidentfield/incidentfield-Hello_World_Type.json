@@ -26,7 +26,7 @@
 	"id": "incident_helloworldtype",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "3.0.12",
+	"itemVersion": "3.0.15",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Hello World Type",
@@ -40,7 +40,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Hello World Type",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
