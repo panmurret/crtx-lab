@@ -1,8 +1,8 @@
 contentitemexportablefields:
   contentitemfields:
     definitionid: ""
-    fromServerVersion: 5.0.0
-    itemVersion: 2.1.35
+    fromServerVersion: 6.10.0
+    itemVersion: 2.3.5
     packID: PAN-OS
     packName: PAN-OS by Palo Alto Networks
     packPropagationLabels:
@@ -16,6 +16,14 @@ description: |-
 
   ***Note - The playbook does not block the address group communication using a policy block rule. This step will be taken once outside of the playbook.
 id: PAN-OS - Block IP - Static Address Group
+inputSections:
+- description: Generic group for inputs
+  inputs:
+  - IP
+  - AddressGroupName
+  - AutoCommit
+  - IPDescription
+  name: General (Inputs group)
 inputs:
 - description: IP address to block
   key: IP
@@ -38,7 +46,7 @@ inputs:
   playbookInputQuery: null
   required: false
   value:
-    simple: Demisto Remediation - Static Address Group
+    simple: Remediation - Static Address Group
 - description: |-
     This input establishes whether to commit the configuration automatically.
     Yes - Commit automatically.
@@ -48,7 +56,18 @@ inputs:
   required: false
   value:
     simple: "No"
+- description: The description of the IP in case it will get created by the playbook.
+  key: IPDescription
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: Automatically created using "PAN-OS - Block IP - Static Address Group"
+      playbook in Cortex XSIAM.
 name: PAN-OS - Block IP - Static Address Group
+outputSections:
+- description: Generic group for outputs
+  name: General (Outputs group)
+  outputs: []
 outputs: []
 starttaskid: "0"
 system: true
@@ -347,8 +366,10 @@ tasks:
     note: false
     quietmode: 0
     scriptarguments:
+      description:
+        simple: ${inputs.IPDescription}
       ip_netmask:
-        simple: 255.255.255.255
+        simple: ${inputs.IP}
       name:
         complex:
           root: inputs.IP
@@ -371,37 +392,6 @@ tasks:
         "position": {
           "x": 1190,
           "y": 880
-        }
-      }
-  "10":
-    continueonerrortype: ""
-    id: "10"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "6"
-    note: false
-    quietmode: 0
-    separatecontext: true
-    skipunavailable: false
-    task:
-      brand: ""
-      id: af6b5eb3-b5d1-4bed-81c6-28ca8d6ec194
-      iscommand: false
-      name: PAN-OS Commit Configuration
-      playbookId: PAN-OS Commit Configuration
-      type: playbook
-      version: -1
-    taskid: af6b5eb3-b5d1-4bed-81c6-28ca8d6ec194
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": 920,
-          "y": 1220
         }
       }
   "11":
@@ -457,7 +447,7 @@ tasks:
       '#default#':
       - "13"
       "yes":
-      - "10"
+      - "16"
     note: false
     quietmode: 0
     separatecontext: false
@@ -584,6 +574,37 @@ tasks:
         "position": {
           "x": 1440,
           "y": 1580
+        }
+      }
+  "16":
+    continueonerrortype: ""
+    id: "16"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4bc1586a-2526-4146-8bd5-98477fd43863
+      iscommand: false
+      name: PAN-OS Commit Configuration v2
+      playbookId: PAN-OS Commit Configuration v2
+      type: playbook
+      version: -1
+    taskid: 4bc1586a-2526-4146-8bd5-98477fd43863
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 920,
+          "y": 1220
         }
       }
 version: -1
