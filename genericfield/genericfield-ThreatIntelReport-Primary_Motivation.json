@@ -27,7 +27,7 @@
 	"id": "generic_ThreatIntelReport_primarymotivation",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.0.15",
+	"itemVersion": "1.0.21",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Primary Motivation",
@@ -41,7 +41,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Primary Motivation",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
