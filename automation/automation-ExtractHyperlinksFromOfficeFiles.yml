@@ -11,7 +11,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -19,12 +19,12 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/office-utils:2.0.0.107687
+dockerimage: demisto/office-utils:2.0.0.2020302
 engineinfo: {}
 mainengineinfo: {}
 name: ExtractHyperlinksFromOfficeFiles
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 outputs:
 - contextPath: ExtractedHyperLink.URL
@@ -38,7 +38,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ExtractHyperlinksFromOfficeFiles', 'start', __line__())
-  demisto.debug('pack name = Common Scripts, pack version = 1.15.56')
+  demisto.debug('pack name = Common Scripts, pack version = 1.19.28')
 
 
   import openpyxl
@@ -106,11 +106,11 @@ script: |
 
 
   def extract_hyperlink_by_file_type(file_name: str, file_path: str) -> CommandResults:
-      if file_name.endswith('.xlsx'):
+      if file_name.lower().endswith('.xlsx'):
           result = extract_hyperlinks_from_xlsx(file_path)
-      elif file_name.endswith('.docx'):
+      elif file_name.lower().endswith('.docx'):
           result = extract_hyperlinks_from_docx(file_path)
-      elif file_name.endswith('.pptx'):
+      elif file_name.lower().endswith('.pptx'):
           result = extract_hyperlinks_from_pptx(file_path)
       else:
           raise ValueError("Unsupported file type. Supported types are: 'xlsx, docx, pptx'")
