@@ -27,7 +27,7 @@
 	"id": "indicator_username",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Username",
@@ -41,7 +41,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Username",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
