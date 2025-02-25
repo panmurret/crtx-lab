@@ -24,7 +24,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -32,13 +32,13 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: CheckContextValue
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 outputs:
 - contextPath: CheckContextKey.name
@@ -52,7 +52,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('CheckContextValue', 'start', __line__())
-  demisto.debug('pack name = Common Scripts, pack version = 1.15.56')
+  demisto.debug('pack name = Common Scripts, pack version = 1.19.28')
   from typing import Dict
 
 
