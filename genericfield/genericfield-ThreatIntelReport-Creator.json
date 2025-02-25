@@ -24,7 +24,7 @@
 	"id": "generic_ThreatIntelReport_creator",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.0.15",
+	"itemVersion": "1.0.21",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Creator",
@@ -38,7 +38,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Creator",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
