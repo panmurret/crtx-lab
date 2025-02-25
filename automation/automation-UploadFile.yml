@@ -8,6 +8,8 @@ args:
 - description: Incident ID to upload the file to.
   name: incID
   required: true
+- description: Integration instance used to run the script.
+  name: using
 - description: Request body.
   name: body
 - auto: PREDEFINED
@@ -31,7 +33,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.3.58
+    itemVersion: 1.3.66
     packID: DemistoRESTAPI
     packName: Cortex REST API
     packPropagationLabels:
@@ -42,20 +44,20 @@ contentitemexportablefields:
 dependson:
   must:
   - core-api-multipart
-dockerimage: demisto/python3:3.10.13.88772
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: UploadFile
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('UploadFile', 'start', __line__())
-  ### pack version: 1.3.58
+  demisto.debug('pack name = Cortex REST API, pack version = 1.3.66')
 
 
 
@@ -77,7 +79,7 @@ script: |
       for entry_id in entry_ids:
           response = upload_file(incident_id, entry_id, body, using, target == 'incident attachment')
           if is_error(response[0]):
-              raise DemistoException("There was an issue uploading the file. Check your API key and input arguments.")
+              raise DemistoException(f"There was an issue uploading the file. Error received: {response[0]['Contents']}")
 
           uploaded_entry_id = demisto.dt(response, 'Contents.response.entries.id')
           readable = 'File uploaded successfully.'
