@@ -228,7 +228,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 2.6.23
+    itemVersion: 2.6.27
     packID: VirusTotal
     packName: VirusTotal
     packPropagationLabels:
@@ -1758,13 +1758,14 @@ script:
     - contextPath: VirusTotal.Analysis.id
       description: The analysis ID.
       type: String
-  dockerimage: demisto/python3:3.11.9.101916
+  dockerimage: demisto/python3:3.12.8.1983910
   nativeimage:
+  - "8.8"
   - "8.6"
   runonce: false
   script: |
     register_module_line('VirusTotal (API v3)', 'start', __line__())
-    ### pack version: 2.6.23
+    demisto.debug('pack name = VirusTotal, pack version = 2.6.27')
 
 
     """
