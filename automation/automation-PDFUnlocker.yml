@@ -16,7 +16,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -24,20 +24,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/readpdf:1.0.0.93363
+dockerimage: demisto/readpdf:1.0.0.2034953
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: PDFUnlocker
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('PDFUnlocker', 'start', __line__())
-  demisto.debug('pack name = Common Scripts, pack version = 1.15.56')
+  demisto.debug('pack name = Common Scripts, pack version = 1.19.28')
 
 
   from pikepdf import Pdf, PasswordError
