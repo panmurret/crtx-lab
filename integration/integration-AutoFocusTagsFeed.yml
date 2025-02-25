@@ -113,7 +113,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 2.2.3
+    itemVersion: 2.2.10
     packID: AutoFocus
     packName: AutoFocus by Palo Alto Networks
     packPropagationLabels:
@@ -152,11 +152,12 @@ script:
   dockerimage: demisto/python3:3.10.10.49934
   feed: true
   nativeimage:
+  - "8.8"
   - "8.6"
   runonce: false
   script: |
     register_module_line('AutoFocusTagsFeed', 'start', __line__())
-    ### pack version: 2.2.3
+    demisto.debug('pack name = AutoFocus by Palo Alto Networks, pack version = 2.2.10')
 
 
     """
