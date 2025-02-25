@@ -24,7 +24,7 @@
 	"id": "generic_ThreatIntelReport_tags",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.0.15",
+	"itemVersion": "1.0.21",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Tags",
@@ -38,7 +38,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Tags",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
