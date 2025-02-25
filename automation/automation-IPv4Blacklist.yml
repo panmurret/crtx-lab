@@ -19,7 +19,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.77
+    itemVersion: 1.2.89
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -27,20 +27,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/netutils:1.0.0.83404
+dockerimage: demisto/netutils:1.0.0.118055
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: IPv4Blacklist
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('IPv4Blacklist', 'start', __line__())
-  demisto.debug('pack name = Filters And Transformers, pack version = 1.2.77')
+  demisto.debug('pack name = Filters And Transformers, pack version = 1.2.89')
 
 
 
