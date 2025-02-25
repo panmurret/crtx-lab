@@ -170,7 +170,7 @@
 	"id": "indicator_publickey",
 	"ipVersion": "",
 	"isReadOnly": true,
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Public Key",
@@ -184,7 +184,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Public Key",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
