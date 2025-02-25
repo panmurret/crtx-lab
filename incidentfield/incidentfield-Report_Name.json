@@ -24,7 +24,7 @@
 	"id": "incident_reportname",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Report Name",
@@ -38,7 +38,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Report Name",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
