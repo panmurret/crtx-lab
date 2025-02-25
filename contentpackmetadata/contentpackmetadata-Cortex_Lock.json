@@ -33,12 +33,12 @@
 						"name": "demisto-lock-info"
 					},
 					{
-						"description": "Release all locks.",
-						"name": "demisto-lock-release-all"
-					},
-					{
 						"description": "Release a lock.",
 						"name": "demisto-lock-release"
+					},
+					{
+						"description": "Release all locks.",
+						"name": "demisto-lock-release-all"
 					}
 				],
 				"description": "Locking mechanism that prevents concurrent execution of different tasks.",
@@ -55,7 +55,7 @@
 		"wizard": null
 	},
 	"created": "2020-11-09T18:43:35Z",
-	"currentVersion": "1.1.3",
+	"currentVersion": "1.1.5",
 	"defaultDataSource": {
 		"id": "",
 		"name": ""
@@ -66,13 +66,13 @@
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.34.28",
+			"minVersion": "1.39.17",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "Locking mechanism that prevents concurrent execution of different tasks",
-	"downloads": 14311,
+	"downloads": 16174,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -90,7 +90,7 @@
 			"name": "Demisto Lock"
 		}
 	],
-	"itemVersion": "1.1.3",
+	"itemVersion": "1.1.5",
 	"keywords": [
 		"Demisto Lock",
 		"Core Lock"
@@ -119,9 +119,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2024-07-14T19:22:43Z",
+	"updated": "2025-01-21T10:33:22Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "1175817",
+	"versionInfo": "2028476",
 	"videos": []
 }
