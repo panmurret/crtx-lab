@@ -14,7 +14,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -22,13 +22,13 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.11.9.104657
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: IdentifyAttachedEmail
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 outputs:
 - contextPath: "yes"
@@ -43,7 +43,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('IdentifyAttachedEmail', 'start', __line__())
-  demisto.debug('pack name = Common Scripts, pack version = 1.15.56')
+  demisto.debug('pack name = Common Scripts, pack version = 1.19.28')
 
 
 
@@ -57,13 +57,20 @@ script: |
       'news or mail text',
   }
 
+  EMAIL_FILE_TYPES = (
+      'eml',
+      'eml}',
+      'message/rfc822'
+  )
+
 
   # IMPORTANT: If you modify the logic here make sure to update ParseEmailFiles too
   def is_email(file_metadata: dict, file_name: str) -> bool:
       file_info = file_metadata.get('info', '').strip().lower()
       file_name = file_name.strip().lower()
+      file_type = file_metadata.get('type', '').strip().lower()
       return any((
-          file_metadata.get('type') in ('eml', 'eml}'),
+          file_type in EMAIL_FILE_TYPES,
           any(info in file_info for info in CONFIDENT_EMAIL_INFOS),
           file_name.endswith('.eml') and ('text' in file_info or file_info == 'data'),
           file_name.endswith('.msg') and 'composite document file v2 document' in file_info
