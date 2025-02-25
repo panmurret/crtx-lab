@@ -27,7 +27,7 @@
 	"id": "incident_applicationid",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Application Id",
@@ -41,7 +41,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Application Id",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
