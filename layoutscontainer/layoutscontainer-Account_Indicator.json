@@ -122,7 +122,7 @@
 						"i": "default-main-reputationSources",
 						"maxW": 3,
 						"moved": false,
-						"name": "Reputation",
+						"name": "Verdict",
 						"static": false,
 						"type": "reputationSources",
 						"w": 1,
@@ -514,6 +514,12 @@
 					}
 				],
 				"type": "custom"
+			},
+			{
+				"hidden": false,
+				"id": "canvas",
+				"name": "Canvas",
+				"type": "canvas"
 			}
 		]
 	},
@@ -542,7 +548,7 @@
 						"i": "indicator-quick-view-info-reputationSources",
 						"maxW": 3,
 						"moved": false,
-						"name": "Reputation",
+						"name": "Verdict",
 						"static": false,
 						"type": "reputationSources",
 						"w": 1,
@@ -771,7 +777,7 @@
 			}
 		]
 	},
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mobile": null,
 	"name": "Account Indicator",
