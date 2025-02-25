@@ -36,7 +36,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.1.0
-    itemVersion: 1.34.37
+    itemVersion: 1.39.20
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -44,20 +44,17 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/sklearn:1.0.0.86554
+dockerimage: demisto/sklearn:1.0.0.117326
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: DrawRelatedIncidentsCanvas
-nativeimage:
-- "8.7"
-- "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('DrawRelatedIncidentsCanvas', 'start', __line__())
-  demisto.debug('pack name = Base, pack version = 1.34.37')
+  demisto.debug('pack name = Base, pack version = 1.39.20')
 
 
 
