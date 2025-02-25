@@ -22,12 +22,11 @@ args:
   name: keysToKeep
 - description: index to delete in case 'key' argument was specified.
   name: index
-comment: |-
-  Delete field from context.
-
-  This automation runs using the default Limited User role, unless you explicitly change the permissions.
-  For more information, see the section about permissions here:
-  https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
+comment: "Delete field from context.\n\nThis automation runs using the default Limited
+  User role, unless you explicitly change the permissions.\nFor more information,
+  see the section about permissions here:\n- For Cortex XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations
+  \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n-
+  For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script"
 commonfields:
   id: DeleteContext
   version: -1
@@ -35,7 +34,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.15.56
+    itemVersion: 1.19.28
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -51,7 +50,7 @@ pswd: ""
 runas: DBotRole
 runonce: false
 script: |
-  // pack version: 1.15.56
+  // pack version: 1.19.28
   LINE_SEPARATOR = '\n';
 
   function errorEntry(text) {
@@ -65,20 +64,27 @@ script: |
   /**
    * Deletes keys from the context and handles errors.
    * @param {Array<string>} keysToDelete - An array of keys to delete.
+   * @param {Array<string>} _keysToKeep - An array of keys to keep.
    * @returns {string} A message summarizing the outcome of the delete operation.
    */
-  function deleteKeys(keysToDelete = []) {
+  function deleteKeys(keysToDelete = [], _keysToKeep = [], keepDBotScoreKey = false) {
       var deletedKeys = []
       var errors = []
       var message = '';
       for (var key of keysToDelete) {
+          if (key == DBOT_SCORE_KEY && keepDBotScoreKey){
+              continue;
+          }
           const originalKey = typeof key === "string" ? key.trim() : key;
           const keyToDelete = isSubPlaybookKey ? 'subplaybook-${currentPlaybookID}.' + originalKey: originalKey;
           const result = executeCommand('delContext', { key: keyToDelete });
           if (!result || result.type === entryTypes.error ) {
               errors.push(result.Contents);
           } else {
-              deletedKeys.push(key);
+              // Do not state deletion of _keysToKeep since they are re-created.
+              if (_keysToKeep.indexOf(keyToDelete) === -1) {
+                  deletedKeys.push(key);
+              }
           }
       }
       if (deletedKeys.length > 0) {
@@ -87,10 +93,10 @@ script: |
       return errors.join(LINE_SEPARATOR) + LINE_SEPARATOR + message;
   }
 
+  const DBOT_SCORE_KEY = 'DBotScore';
   var shouldDeleteAll = (args.all === 'yes');
   var isSubPlaybookKey = (args.subplaybook === 'yes');
   var keysToKeep = (args.keysToKeep) ? args.keysToKeep.split(',').map(item => item.trim()) : [];
-
   if (args.subplaybook === 'auto') {
       var res = executeCommand('Print', { value: 'id=${currentPlaybookID}' });
       if (res && res[0].Contents && res[0].Contents.startsWith('id=')) {
@@ -109,13 +115,16 @@ script: |
 
   if (shouldDeleteAll) {
       var keysToKeepObj = {};
-      var KeepDBotScoreKey = false;
+      var keepDBotScoreKey = false;
+      var value;
+
       index = keysToKeep.indexOf("DBotScore");
       if (index > -1) {
-        keysToKeep.splice(index, 1);
-        KeepDBotScoreKey = true;
+          keysToKeep.splice(index, 1);
+          keepDBotScoreKey = true;
       }
-      var value;
+
+      // Collect all the keys to keep.
       for (var i = 0; i < keysToKeep.length; i++) {
           value = dq(invContext, keysToKeep[i]);
           if (value !== null && value !== undefined) {
@@ -134,7 +143,8 @@ script: |
           }
       }
       var keysToDelete = Object.keys(invContext);
-      var message = deleteKeys(keysToDelete);
+      // Delete all the keys, do not state deletion of keysToKeep since they are re-created.
+      var message = deleteKeys(keysToDelete, keysToKeep, keepDBotScoreKey);
 
       return {
           Type: entryTypes.note,
@@ -142,6 +152,7 @@ script: |
           ContentsFormat: formats.text,
           HumanReadable: message,
           ReadableContentsFormat: formats.markdown,
+          // Re-create keysToKeep with collected object.
           EntryContext: keysToKeepObj
       };
 
