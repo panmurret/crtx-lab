@@ -35,7 +35,6 @@
 		"AWS Security Hub Finding",
 		"Prisma Cloud - VM Alert Prioritization",
 		"Rapid7 ThreatCommand Alert",
-		"Prisma Cloud - VM Alert Prioritization",
 		"FreshworksFreshservice Ticket",
 		"FreshworksFreshservice Release Request",
 		"FreshworksFreshservice Problem Request",
@@ -44,7 +43,8 @@
 		"CrowdStrike Falcon IDP Detection",
 		"Cyberint Incident",
 		"CrowdStrike Falcon Mobile Detection",
-		"CrowdStrike Falcon On-Demand Scans Detection"
+		"CrowdStrike Falcon On-Demand Scans Detection",
+		"CrowdStrike Falcon OFP Detection"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -65,7 +65,7 @@
 	"id": "incident_lastupdatetime",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Last Update Time",
@@ -79,7 +79,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Last Update Time",
 	"propagationLabels": [
 		"all"
 	],
@@ -91,7 +91,8 @@
 	"sla": 0,
 	"system": false,
 	"systemAssociatedTypes": [
-		"Prisma Cloud - VM Alert Prioritization"
+		"Prisma Cloud - VM Alert Prioritization",
+		"CrowdStrike Falcon OFP Detection"
 	],
 	"template": "",
 	"threshold": 72,
