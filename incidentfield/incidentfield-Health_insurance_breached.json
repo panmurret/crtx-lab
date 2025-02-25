@@ -26,7 +26,7 @@
 	"id": "incident_healthinsurancebreached",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.15.56",
+	"itemVersion": "1.19.28",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Health insurance breached",
@@ -40,7 +40,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Health insurance breached",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
