@@ -26,7 +26,7 @@
 	"id": "incident_countrywherethebreachtookplace",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.15.56",
+	"itemVersion": "1.19.28",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Country where the breach took place",
@@ -40,7 +40,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Country where the breach took place",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
