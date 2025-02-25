@@ -60,18 +60,6 @@ configuration:
   required: false
   section: Collect
   type: 0
-- additionalinfo: "Runs the service on this port from within Cortex XSOAR. Requires
-    a unique port for each long-running integration instance. Do not use the same
-    port for multiple instances.\nNote: If you click the test button more than once,
-    a failure may occur mistakenly indicating that the port is already in use. (For
-    Cortex XSOAR 8 and Cortex XSIAM) If you do not enter a Listen Port, an unused
-    port for the EDL will automatically be generated when the instance is saved. However,
-    if using an engine, you must enter a Listen Port.                     "
-  display: Listen Port
-  name: longRunningPort
-  required: false
-  section: Connect
-  type: 0
 - additionalinfo: (For Cortex XSOAR 6.x) For use with HTTPS - the certificate that
     the service should use. (For Cortex XSOAR 8 and Cortex XSIAM) Custom certificates
     are not supported.
@@ -99,6 +87,18 @@ configuration:
   required: false
   section: Connect
   type: 9
+- additionalinfo: "Runs the service on this port from within Cortex XSOAR. Requires
+    a unique port for each long-running integration instance. Do not use the same
+    port for multiple instances.\nNote: If you click the **Test** button more than
+    once, a failure may occur mistakenly indicating that the port is already in use.
+    (For Cortex XSOAR 8 and Cortex XSIAM) If you do not enter a Listen Port, an unused
+    port for the EDL will automatically be generated when the instance is saved. However,
+    if using an engine, you must enter a Listen Port.                     "
+  display: Listen Port
+  name: longRunningPort
+  required: true
+  section: Connect
+  type: 0
 - additionalinfo: If selected, the comment "# Empty list" is added to an empty list.
   advanced: true
   defaultvalue: "true"
@@ -174,7 +174,7 @@ configuration:
     For example - if the number is 8, then 0.0.0.0/2 is excluded from the list.
   advanced: true
   defaultvalue: "8"
-  display: Maximum CIDR network prefix bits size
+  display: Maximum Size of CIDR Block (by mask bit)
   name: maximum_cidr_size
   required: false
   section: Collect
@@ -202,6 +202,7 @@ configuration:
   display: Add HSTS header
   name: hsts_header
   required: false
+  section: Collect
   type: 8
 - additionalinfo: For use with McAfee Web Gateway format - set the indicator list
     type.
@@ -306,7 +307,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 3.3.3
+    itemVersion: 3.3.8
     packID: EDL
     packName: Generic Export Indicators Service
     packPropagationLabels:
@@ -322,27 +323,32 @@ detaileddescription: |-
   If you have several Generic Export Indicators Service integration instances, make sure to use **different listening ports** to separate the outbound feeds.
   Note: After a successful configuration of an instance, if the 'test button' is clicked again, it may result in a failure due to an incorrect assumption that the port is already in use. Nevertheless, it is important to highlight that despite this issue, the instance will continue to function correctly.
 
-
-
+  The Generic Export Indicators Service is a long-running integration. For more information about long-running integrations, check out the  Forward Requests to Long-Running Integrations article: [Cortex XSOAR 8 Cloud](https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Forward-Requests-to-Long-Running-Integrations) or [Cortex XSOAR 8 On-prem](https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Integration-commands-in-the-CLI) documentation.
 
 
 
 
 
   ### Access the Generic Export Indicators Service by URL and Port (HTTP)
-  In a web browser, go to **http://<cortex-xsoar-server-address>:<listen_port>**.
 
   **Note**: For security purposes, Cortex XSOAR recommends that you use HTTPS when accessing the indicator service through the URL and port. To do so, you must provide a certificate and private key, in the respective fields. In addition, make sure to provide credentials that must be used to connect to the integration instance.
 
-  **Note**: By default, the route to access the Generic Export Indicators Service by instance name will be open without security hardening and might expose you to network risks. Cortex XSOAR recommends that you use the service with a username and password. Click **Switch to username and password** and provide the credentials that must be used to access the service.
+  **Note**: Do not set `username` and `password` in the integration instance if you are running the integration via the hosted instance. The `username` and `password` fields are for usage when running the integration via an on-prem engine.
 
-  **Note**: The `Listen Port` parameter is required.
+  **Note**: If no `Listen Port` param was given and the test button was clicked, the test will run with the default port 1111. After pressing `save & exit` a new free port will be assigned to the `Listen Port` parameter automatically.
 
-  1. Navigate to **Settings > About > Troubleshooting**.
-  2. In the **Server Configuration** section, verify that the `instance.execute.external.<instance_name>` key is set to `true`. If this key does not exist, click **+ Add Server Configuration** and add the `instance.execute.external.<instance_name>` and set the value to `true`. See [this documentation](https://xsoar.pan.dev/docs/reference/articles/long-running-invoke) for further information.
-  3.  In a web browser, go to
-      `https://*<xsoar_address>*/instance/execute/*<instance_name>*`
-       (In Multi Tenant environments, go to `https://<cortex-xsoar-address>/acc-<account name>/instance/execute/<instance_name>/`)
+  **Note**: The External Dynamic List is not accessible via web browsers and you will receive an unauthorized error if accessing the External Dynamic List via a browser.
+
+  **Note**: When using an instance that is running on an engine, you can access only with the `Listen Port`. Go to **http://<cortex-xsoar-server-address>:<listen_port>**.
+
+  1. To access the **Generic Export Indicators Service** by instance name, set up the **username** and **password** values in the **External Dynamic List Integration** page (**Settings & info** > **SETTINGS** > **Long Running Integrations**).
+  2. You can access the External Dynamic List at the following URL: `https://ext-<cortex-xsoar-address>/xsoar/instance/execute/<instance-name>`. Note: You cannot access the External Dynamic List via a web browser.
+  3. For example to test via curl with an instance with instance name: `EDL_instance_1`, XSOAR address `my-xsoar-subdomain.us.paloaltonetworks.com` and credentials test/password:
+  ```
+  curl -v -u test:password https://ext-my-xsoar-subdomain.us.paloaltonetworks.com/xsoar/instance/execute/EDL_instance_1
+  ```
+
+
 
 
   #### Note:
@@ -384,8 +390,8 @@ detaileddescription: |-
   To view logs concerning the creation of the indicator list and its current status add the `/log` suffix to the list URL.
 
 
+  `https://ext-<cortex-xsoar-address>/xsoar/instance/execute/<instance-name>/log`
 
-  `https://*<xsoar_address>*/instance/execute/*<instance_name>*/log`
 
   ---
   [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/edl)
@@ -579,13 +585,13 @@ script:
       - "True"
     description: Updates values stored in the List (only available On-Demand).
     name: export-indicators-list-update
-  dockerimage: demisto/flask-nginx:1.0.0.96292
+  dockerimage: demisto/flask-nginx:1.0.0.117310
   longRunning: true
   longRunningPort: true
   runonce: false
   script: |
     register_module_line('EDL', 'start', __line__())
-    ### pack version: 3.3.3
+    demisto.debug('pack name = Generic Export Indicators Service, pack version = 3.3.8')
     import os
     from datetime import datetime
     from pathlib import Path
@@ -1425,7 +1431,8 @@ script:
                     formatted_indicators.write(new_line + domain)
                     new_line = '\n'
 
-            if ioc_type == FeedIndicatorType.CIDR and is_large_cidr(indicator, request_args.maximum_cidr_size):
+            if ioc_type in [FeedIndicatorType.CIDR, FeedIndicatorType.IPv6CIDR] and is_large_cidr(indicator,
+                                                                                                  request_args.maximum_cidr_size):
                 log_stats = log_indicator_line(raw_indicator=indicator_raw,
                                                indicator=indicator,
                                                action=IndicatorAction.DROPPED.value,
@@ -1949,7 +1956,6 @@ script:
             2. Valid cache_refresh_rate
         """
         if not params.get('longRunningPort'):
-            # This is for the autogeneration port feature before port allocation.
             params['longRunningPort'] = '1111'
         get_params_port(params)
         on_demand = params.get('on_demand', None)
