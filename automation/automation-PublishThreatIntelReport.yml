@@ -10,7 +10,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.0.15
+    itemVersion: 1.0.21
     packID: ThreatIntelReports
     packName: Threat Intel Reports (BETA)
     packPropagationLabels:
@@ -18,19 +18,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.86272
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: PublishThreatIntelReport
 nativeimage:
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('PublishThreatIntelReport', 'start', __line__())
-  ### pack version: 1.0.15
+  demisto.debug('pack name = Threat Intel Reports (BETA), pack version = 1.0.21')
 
 
   from datetime import datetime
