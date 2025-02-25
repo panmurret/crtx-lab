@@ -98,7 +98,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 2.6.23
+    itemVersion: 2.6.27
     packID: VirusTotal
     packName: VirusTotal
     packPropagationLabels:
@@ -142,14 +142,15 @@ script:
   - arguments: []
     description: This command will reset your fetch history.
     name: vt-reset-fetch-indicators
-  dockerimage: demisto/python3:3.10.13.84405
+  dockerimage: demisto/python3:3.11.10.115186
   feed: true
   nativeimage:
+  - "8.8"
   - "8.6"
   runonce: false
   script: |
     register_module_line('VirusTotal Livehunt Feed', 'start', __line__())
-    ### pack version: 2.6.23
+    demisto.debug('pack name = VirusTotal, pack version = 2.6.27')
 
 
     import urllib3
