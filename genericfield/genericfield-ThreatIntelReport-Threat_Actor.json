@@ -27,7 +27,7 @@
 	"id": "generic_ThreatIntelReport_threatactor",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.0.15",
+	"itemVersion": "1.0.21",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Threat Actor",
@@ -41,7 +41,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Threat Actor",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
