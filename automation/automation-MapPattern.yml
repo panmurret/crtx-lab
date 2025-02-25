@@ -73,7 +73,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.2.77
+    itemVersion: 1.2.89
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -81,20 +81,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.11.10.115186
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: MapPattern
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('MapPattern', 'start', __line__())
-  demisto.debug('pack name = Filters And Transformers, pack version = 1.2.77')
+  demisto.debug('pack name = Filters And Transformers, pack version = 1.2.89')
 
 
   import fnmatch
@@ -444,8 +444,12 @@ script: |
 
               value = '' if value is None else str(value)
               if pattern not in self.__wildcards:
-                  if pattern != value:
-                      return False
+                  if (self.__regex_flags & re.IGNORECASE) != 0:
+                      if pattern.lower() != value.lower():
+                          return False
+                  else:
+                      if pattern != value:
+                          return False
 
               if any(x == value for x in exclusions):
                   return False
