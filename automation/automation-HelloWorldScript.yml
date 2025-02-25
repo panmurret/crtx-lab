@@ -9,7 +9,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 3.0.12
+    itemVersion: 3.0.15
     packID: HelloWorld
     packName: HelloWorld
     packPropagationLabels:
@@ -17,11 +17,12 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.11.10.116949
 engineinfo: {}
 mainengineinfo: {}
 name: HelloWorldScript
 nativeimage:
+- "8.8"
 - "8.6"
 outputs:
 - contextPath: HelloWorld.hello
@@ -32,7 +33,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('HelloWorldScript', 'start', __line__())
-  ### pack version: 3.0.12
+  demisto.debug('pack name = HelloWorld, pack version = 3.0.15')
 
 
   """HelloWorld Script for Cortex XSOAR (aka Demisto)
@@ -58,7 +59,7 @@ script: |
 
 
 
-  from typing import Dict, Any
+  from typing import Any
 
 
   ''' STANDALONE FUNCTION '''
@@ -81,7 +82,7 @@ script: |
   ''' COMMAND FUNCTION '''
 
 
-  def say_hello_command(args: Dict[str, Any]) -> CommandResults:
+  def say_hello_command(args: dict[str, Any]) -> CommandResults:
       """helloworld-say-hello command: Returns Hello {somename}
 
       Args:
