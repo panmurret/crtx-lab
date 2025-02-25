@@ -26,7 +26,7 @@
 	"id": "incident_target",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "2.1.35",
+	"itemVersion": "2.3.5",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Target",
@@ -40,7 +40,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Target",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
