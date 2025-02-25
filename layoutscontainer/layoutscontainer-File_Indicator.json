@@ -749,6 +749,12 @@
 					}
 				],
 				"type": "custom"
+			},
+			{
+				"hidden": false,
+				"id": "canvas",
+				"name": "Canvas",
+				"type": "canvas"
 			}
 		]
 	},
@@ -1031,7 +1037,7 @@
 						"maxW": 3,
 						"minH": 1,
 						"moved": false,
-						"name": "Reputation",
+						"name": "Verdict",
 						"static": false,
 						"type": "reputationSources",
 						"w": 1,
@@ -1066,7 +1072,7 @@
 			}
 		]
 	},
-	"itemVersion": "3.5.13",
+	"itemVersion": "3.8.4",
 	"locked": false,
 	"mobile": null,
 	"name": "File Indicator",
