@@ -150,7 +150,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.2.0
-    itemVersion: 1.34.37
+    itemVersion: 1.39.20
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -158,12 +158,12 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.86272
+dockerimage: demisto/python3:3.11.10.115186
 engineinfo: {}
 mainengineinfo: {}
 name: SearchIndicatorRelationships
 nativeimage:
-- "8.7"
+- "8.8"
 - "8.6"
 outputs:
 - contextPath: Relationships.EntityA
@@ -213,7 +213,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('SearchIndicatorRelationships', 'start', __line__())
-  demisto.debug('pack name = Base, pack version = 1.34.37')
+  demisto.debug('pack name = Base, pack version = 1.39.20')
 
 
 
