@@ -38,7 +38,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "VT Engine Detection Names",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
