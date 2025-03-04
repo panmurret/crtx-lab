@@ -44,7 +44,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Global Prevalence",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
