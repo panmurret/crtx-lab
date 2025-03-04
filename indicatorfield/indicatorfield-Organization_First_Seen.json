@@ -44,7 +44,7 @@
 		"all"
 	],
 	"placeholder": "",
-	"pretty_name": "",
+	"pretty_name": "Organization First Seen",
 	"propagationLabels": [],
 	"required": false,
 	"runScriptAfterUpdate": false,
