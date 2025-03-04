@@ -9,6 +9,7 @@ contentitemexportablefields:
     propagationLabels:
     - all
     toServerVersion: ""
+dirtyInputs: true
 id: 77e137b7-d99b-4834-8130-996c1de16464
 inputs: []
 name: Vision server monitoring
