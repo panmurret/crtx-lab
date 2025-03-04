@@ -38,6 +38,7 @@
 	"packPropagationLabels": [
 		"all"
 	],
+	"propagationLabels": [],
 	"regex": "(?i)\\bTA-?\\d{4}\\b",
 	"reputationCommand": "",
 	"reputationScriptName": "",
