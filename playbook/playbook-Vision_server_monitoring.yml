@@ -1,0 +1,208 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: 77e137b7-d99b-4834-8130-996c1de16464
+inputs: []
+name: Vision server monitoring
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 5a5cb051-b2db-4896-84d3-1861f8cba5eb
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 5a5cb051-b2db-4896-84d3-1861f8cba5eb
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      method:
+        simple: GET
+      url:
+        simple: http://vision.paloaltonetworks.local:3002/tacopilot/query
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Sends a HTTP request with advanced capabilities.
+      id: acd84b4c-ae98-4392-8386-94243c3994a1
+      iscommand: false
+      name: Connect to vision server
+      script: HttpV2
+      type: regular
+      version: -1
+    taskid: acd84b4c-ae98-4392-8386-94243c3994a1
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 195
+        }
+      }
+  "2":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: HttpRequest.Response.StatusCode
+          operator: isNotEqualNumber
+          right:
+            value:
+              simple: "200"
+      label: "yes"
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "5"
+      "yes":
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a3e7eb51-e5b2-4393-884b-b35b4b8a1e81
+      iscommand: false
+      name: 500 error?
+      type: condition
+      version: -1
+    taskid: a3e7eb51-e5b2-4393-884b-b35b4b8a1e81
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 370
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      body:
+        simple: Check vision, XSOAR instance opp-etac is reporting it is returning
+          a non-200 response code
+      subject:
+        simple: Vision server down notification
+      to:
+        simple: amurret@paloaltonetworks.com
+      using:
+        simple: mailsender
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Mail Sender (New)
+      description: Send an email.
+      id: c96daab1-76f8-45ae-83de-6db07aee0a36
+      iscommand: true
+      name: Send email
+      script: Mail Sender (New)|||send-mail
+      type: regular
+      version: -1
+    taskid: c96daab1-76f8-45ae-83de-6db07aee0a36
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 545
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f01c868c-5ca9-452d-8cb4-4e928ca64387
+      iscommand: false
+      name: End
+      type: title
+      version: -1
+    taskid: f01c868c-5ca9-452d-8cb4-4e928ca64387
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 720
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 735,
+        "width": 492.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
