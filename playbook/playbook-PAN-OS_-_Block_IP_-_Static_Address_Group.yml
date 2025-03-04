@@ -411,8 +411,8 @@ tasks:
       brand: ""
       id: e910a8ff-52dd-40db-8fe2-e39b357b4c15
       iscommand: false
-      name: PAN-OS Commit Configuration
-      playbookId: PAN-OS Commit Configuration
+      name: PAN-OS Commit Configuration v2
+      playbookId: PAN-OS Commit Configuration v2
       type: playbook
       version: -1
     taskid: e910a8ff-52dd-40db-8fe2-e39b357b4c15
