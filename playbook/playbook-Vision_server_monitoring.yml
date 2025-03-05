@@ -143,7 +143,7 @@ tasks:
       subject:
         simple: Vision server down notification
       to:
-        simple: amurret@paloaltonetworks.com
+        simple: amurret@paloaltonetworks.com, jjubran@paloaltonetworks.com
       using:
         simple: mailsender
     separatecontext: false
@@ -151,13 +151,13 @@ tasks:
     task:
       brand: Mail Sender (New)
       description: Send an email.
-      id: c96daab1-76f8-45ae-83de-6db07aee0a36
+      id: 1ab5f18a-b882-4706-8166-35cab8a94012
       iscommand: true
       name: Send email
       script: Mail Sender (New)|||send-mail
       type: regular
       version: -1
-    taskid: c96daab1-76f8-45ae-83de-6db07aee0a36
+    taskid: 1ab5f18a-b882-4706-8166-35cab8a94012
     timertriggers: []
     type: regular
     view: |-
