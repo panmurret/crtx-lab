@@ -173,25 +173,57 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.close.inv
+      id: ee1afcbb-9229-4bd5-8cd6-17c06fea9947
+      iscommand: true
+      name: Close incident
+      script: Builtin|||closeInvestigation
+      type: regular
+      version: -1
+    taskid: ee1afcbb-9229-4bd5-8cd6-17c06fea9947
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 200,
+          "y": 980
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
     note: false
     quietmode: 0
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: f01c868c-5ca9-452d-8cb4-4e928ca64387
+      id: c55ddec0-33c7-491b-8c03-0f7a896cf1d9
       iscommand: false
       name: End
       type: title
       version: -1
-    taskid: f01c868c-5ca9-452d-8cb4-4e928ca64387
+    taskid: c55ddec0-33c7-491b-8c03-0f7a896cf1d9
     timertriggers: []
     type: title
     view: |-
       {
         "position": {
-          "x": 162.5,
-          "y": 720
+          "x": 200,
+          "y": 1180
         }
       }
 version: -1
@@ -200,8 +232,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 735,
-        "width": 492.5,
+        "height": 1195,
+        "width": 530,
         "x": 50,
         "y": 50
       }
