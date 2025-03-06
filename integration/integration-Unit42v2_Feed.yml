@@ -8,16 +8,19 @@ configuration:
   hiddenusername: true
   name: credentials
   required: false
+  section: Connect
   type: 9
 - display: API Key
   hidden: true
   name: api_key
   required: false
+  section: Connect
   type: 4
 - defaultvalue: "true"
   display: Fetch indicators
   name: feed
   required: false
+  section: Collect
   type: 8
 - additionalinfo: Indicators from this integration instance will be marked with this
     reputation
@@ -29,6 +32,7 @@ configuration:
   - Suspicious
   - Bad
   required: false
+  section: Collect
   type: 18
 - additionalinfo: Reliability of the source providing the intelligence data
   defaultvalue: A - Completely reliable
@@ -42,6 +46,7 @@ configuration:
   - E - Unreliable
   - F - Reliability cannot be judged
   required: true
+  section: Collect
   type: 15
 - additionalinfo: The Traffic Light Protocol (TLP) designation to apply to indicators
     fetched from the feed
@@ -53,6 +58,7 @@ configuration:
   - GREEN
   - WHITE
   required: false
+  section: Collect
   type: 15
 - display: ""
   name: feedExpirationPolicy
@@ -62,15 +68,18 @@ configuration:
   - indicatorType
   - suddenDeath
   required: false
+  section: Collect
   type: 17
 - display: ""
   name: feedExpirationInterval
   required: false
+  section: Collect
   type: 1
 - defaultvalue: "240"
   display: Feed Fetch Interval
   name: feedFetchInterval
   required: false
+  section: Collect
   type: 19
 - additionalinfo: When selected, the exclusion list is ignored for indicators from
     this feed. This means that if an indicator from this feed is on the exclusion
@@ -78,31 +87,36 @@ configuration:
   display: Bypass exclusion list
   name: feedBypassExclusionList
   required: false
+  section: Collect
   type: 8
 - additionalinfo: Supports CSV values.
   display: Tags
   name: feedTags
   required: false
+  section: Collect
   type: 0
 - display: Use system proxy settings
   name: proxy
   required: false
+  section: Connect
   type: 8
 - defaultvalue: "false"
   display: Trust any certificate (not secure)
   name: insecure
   required: false
+  section: Connect
   type: 8
 - defaultvalue: "true"
   display: Create relationships
   name: create_relationships
   required: false
+  section: Collect
   type: 8
 contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.0.62
+    itemVersion: 1.0.63
     packID: FeedUnit42v2
     packName: Unit 42 ATOMs Feed
     packPropagationLabels:
@@ -135,7 +149,7 @@ script:
       - attack-pattern
     description: Retrieves a limited number of the indicators.
     name: unit42-get-indicators
-  dockerimage: demisto/taxii2:1.0.0.117320
+  dockerimage: demisto/taxii2:1.0.0.2477082
   feed: true
   nativeimage:
   - "8.8"
@@ -143,7 +157,7 @@ script:
   runonce: false
   script: |
     register_module_line('Unit42v2 Feed', 'start', __line__())
-    demisto.debug('pack name = Unit 42 ATOMs Feed, pack version = 1.0.62')
+    demisto.debug('pack name = Unit 42 ATOMs Feed, pack version = 1.0.63')
     from taxii2client.common import TokenAuth
     from taxii2client.v20 import Server, as_pages
 
@@ -2785,13 +2799,26 @@ script:
             data: list = []
             for api_root in self.server.api_roots:
                 for collection in api_root.collections:
-                    for bundle in as_pages(collection.get_objects, per_request=100, **kwargs):
-                        data.extend(bundle.get('objects') or [])
-                        if test and limit < len(data):
-                            return data
+                    for _ in range(2):
+                        try:
+                            objects: list = []
+                            for bundle in as_pages(collection.get_objects, per_request=100, **kwargs):
+                                objects.extend(bundle.get('objects') or [])
+                                if test and limit < len(objects):
+                                    return objects
+
+                            data.extend(objects)
+                            break
+                        except requests.exceptions.HTTPError as e:
+                            if e.response.status_code == 502:
+                                demisto.debug("Received 502 error, retrying...")
+                                time.sleep(25)
+                            else:
+                                raise
 
             if test:
                 return data
+
             self.objects_data[kwargs.get('type')] = data
             return None
 
