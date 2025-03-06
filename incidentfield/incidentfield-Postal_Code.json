@@ -26,7 +26,7 @@
 	"id": "incident_postalcode",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.19.28",
+	"itemVersion": "1.19.30",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Postal Code",
