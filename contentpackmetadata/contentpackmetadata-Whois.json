@@ -26,16 +26,16 @@
 				"category": "Data Enrichment \u0026 Threat Intelligence",
 				"commands": [
 					{
+						"description": "Provides data enrichment for domains.",
+						"name": "domain"
+					},
+					{
 						"description": "Provides data enrichment for domains using free resources. Availability of those services may be limited.",
 						"name": "whois"
 					},
 					{
 						"description": "Provides data enrichment for ips.",
 						"name": "ip"
-					},
-					{
-						"description": "Provides data enrichment for domains.",
-						"name": "domain"
 					}
 				],
 				"description": "Provides data enrichment for domains.",
@@ -47,12 +47,12 @@
 		"list": null,
 		"playbook": [
 			{
-				"description": "This playbook compares the domain registrant against the Cortex XSOAR list of approved registrants provided in the inputs. A registrant is the company or entity that owns the domain.",
-				"name": "TIM - Process Domain Registrant With Whois"
-			},
-			{
 				"description": "This playbook compares the domain creation time against a provided time value such as one month ago. The period can be configured within the playbook inputs MinimumAgeOfDomainMonths or MinimumAgeOfDomainHours. The playbook calculates the timestamp for the relevant period and compares it to the domain creation time value provided by Whois. The domains are outputted accordingly if they were created before or after the compared time, respectively.",
 				"name": "TIM - Process Domain Age With Whois"
+			},
+			{
+				"description": "This playbook compares the domain registrant against the Cortex XSOAR list of approved registrants provided in the inputs. A registrant is the company or entity that owns the domain.",
+				"name": "TIM - Process Domain Registrant With Whois"
 			},
 			{
 				"description": "This playbook uses several sub playbooks to process and tag indicators based on the results of the Whois tool.",
@@ -65,7 +65,7 @@
 		"wizard": null
 	},
 	"created": "2020-07-26T20:02:55Z",
-	"currentVersion": "1.5.23",
+	"currentVersion": "1.5.24",
 	"defaultDataSource": {
 		"id": "",
 		"name": ""
@@ -76,14 +76,14 @@
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.39.18",
+			"minVersion": "1.39.21",
 			"name": "Base"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.19.16",
+			"minVersion": "1.19.28",
 			"name": "Common Scripts"
 		},
 		"DomainTools": {
@@ -110,7 +110,7 @@
 	},
 	"deprecated": false,
 	"description": "This Content Pack helps you run Whois commands as playbook tasks or real-time actions within Cortex XSOAR to obtain valuable domain metadata.",
-	"downloads": 39833,
+	"downloads": 40578,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -140,7 +140,7 @@
 			"name": "DomainTools Iris"
 		}
 	],
-	"itemVersion": "1.5.23",
+	"itemVersion": "1.5.24",
 	"keywords": [],
 	"legacy": true,
 	"modules": [],
@@ -166,16 +166,15 @@
 		"url": "https://www.paloaltonetworks.com/cortex"
 	},
 	"tags": [
-		"Trending",
-		"Plug \u0026 Enrich",
 		"Free Enricher",
 		"TIM",
+		"Plug \u0026 Enrich",
 		"Getting Started"
 	],
 	"toServerVersion": "",
-	"updated": "2025-01-29T20:47:48Z",
+	"updated": "2025-02-26T10:54:00Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "2102560",
+	"versionInfo": "2564363",
 	"videos": []
 }
