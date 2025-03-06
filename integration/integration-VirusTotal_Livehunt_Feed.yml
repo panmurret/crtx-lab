@@ -98,7 +98,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 2.6.27
+    itemVersion: 2.7.0
     packID: VirusTotal
     packName: VirusTotal
     packPropagationLabels:
@@ -150,7 +150,7 @@ script:
   runonce: false
   script: |
     register_module_line('VirusTotal Livehunt Feed', 'start', __line__())
-    demisto.debug('pack name = VirusTotal, pack version = 2.6.27')
+    demisto.debug('pack name = VirusTotal, pack version = 2.7.0')
 
 
     import urllib3
