@@ -45,7 +45,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.39.20
+    itemVersion: 1.39.21
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -63,7 +63,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('SanePdfReports', 'start', __line__())
-  demisto.debug('pack name = Base, pack version = 1.39.20')
+  demisto.debug('pack name = Base, pack version = 1.39.21')
 
 
 
