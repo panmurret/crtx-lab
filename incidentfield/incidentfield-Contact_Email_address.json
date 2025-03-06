@@ -26,7 +26,7 @@
 	"id": "incident_contactemailaddress",
 	"ipVersion": "",
 	"isReadOnly": false,
-	"itemVersion": "1.19.28",
+	"itemVersion": "1.19.30",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Contact Email address",
