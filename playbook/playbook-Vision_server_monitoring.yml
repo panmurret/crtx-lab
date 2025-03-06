@@ -41,7 +41,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 265,
           "y": 50
         }
       }
@@ -60,25 +60,25 @@ tasks:
       method:
         simple: GET
       url:
-        simple: http://vision.paloaltonetworks.local:3002/tacopilot/query
+        simple: http://vision.paloaltonetworks.local:3002/keepalive
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
       description: Sends a HTTP request with advanced capabilities.
-      id: acd84b4c-ae98-4392-8386-94243c3994a1
+      id: 1aa37da5-e2a7-4268-85ed-4cd50c504ef0
       iscommand: false
       name: Connect to vision server
       script: HttpV2
       type: regular
       version: -1
-    taskid: acd84b4c-ae98-4392-8386-94243c3994a1
+    taskid: 1aa37da5-e2a7-4268-85ed-4cd50c504ef0
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 265,
           "y": 195
         }
       }
@@ -88,11 +88,11 @@ tasks:
       - - left:
             iscontext: true
             value:
-              simple: HttpRequest.Response.StatusCode
-          operator: isNotEqualNumber
+              simple: HttpRequest.Response.Body
+          operator: isNotEqualString
           right:
             value:
-              simple: "200"
+              simple: alive
       label: "yes"
     continueonerrortype: ""
     id: "2"
@@ -101,7 +101,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#default#':
-      - "5"
+      - "7"
       "yes":
       - "3"
     note: false
@@ -110,18 +110,18 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: a3e7eb51-e5b2-4393-884b-b35b4b8a1e81
+      id: e141e4f0-3f14-42e3-8711-32deeab0d675
       iscommand: false
-      name: 500 error?
+      name: Keepalive failed?
       type: condition
       version: -1
-    taskid: a3e7eb51-e5b2-4393-884b-b35b4b8a1e81
+    taskid: e141e4f0-3f14-42e3-8711-32deeab0d675
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 162.5,
+          "x": 265,
           "y": 370
         }
       }
@@ -183,20 +183,20 @@ tasks:
     task:
       brand: Builtin
       description: commands.local.cmd.close.inv
-      id: ee1afcbb-9229-4bd5-8cd6-17c06fea9947
+      id: 58961654-47d9-447e-80d0-04e58029df8d
       iscommand: true
-      name: Close incident
+      name: Close incident, do not delete, server down
       script: Builtin|||closeInvestigation
       type: regular
       version: -1
-    taskid: ee1afcbb-9229-4bd5-8cd6-17c06fea9947
+    taskid: 58961654-47d9-447e-80d0-04e58029df8d
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 200,
-          "y": 980
+          "x": 50,
+          "y": 720
         }
       }
   "6":
@@ -222,8 +222,77 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 200,
-          "y": 1180
+          "x": 50,
+          "y": 895
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.close.inv
+      id: 138913a5-3852-440e-8e71-fae81a2d3b3c
+      iscommand: true
+      name: Close and delete, server up
+      script: Builtin|||closeInvestigation
+      type: regular
+      version: -1
+    taskid: 138913a5-3852-440e-8e71-fae81a2d3b3c
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 545
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ids:
+        simple: ${incident.id}
+      using:
+        simple: core1
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Core REST API
+      description: Delete Core incidents.
+      id: bbe135ac-10f6-48b4-8121-fca637620ddf
+      iscommand: true
+      name: Delete investigation
+      script: Core REST API|||core-delete-incidents
+      type: regular
+      version: -1
+    taskid: bbe135ac-10f6-48b4-8121-fca637620ddf
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 720
         }
       }
 version: -1
@@ -232,8 +301,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 1195,
-        "width": 530,
+        "height": 910,
+        "width": 810,
         "x": 50,
         "y": 50
       }
