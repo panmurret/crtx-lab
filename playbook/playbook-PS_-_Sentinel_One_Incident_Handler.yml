@@ -1,0 +1,1385 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dirtyInputs: true
+id: 045e3960-844f-487b-892a-6cbba564e1d9
+inputs: []
+name: PS - Sentinel One Incident Handler
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 969b6066-2b8b-4664-82c8-0ffa4fa7befb
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 969b6066-2b8b-4664-82c8-0ffa4fa7befb
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "21"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      agent_id:
+        simple: ${incident.agentid}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: SentinelOne V2
+      description: Returns the details of an agent according to the agent ID.
+      id: 74d2666e-8393-41b4-80be-ae8ae47ccd98
+      iscommand: true
+      name: Get Agent Info
+      script: SentinelOne V2|||sentinelone-get-agent
+      type: regular
+      version: -1
+    taskid: 74d2666e-8393-41b4-80be-ae8ae47ccd98
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 195
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      sentineloneunittag:
+        complex:
+          accessor: value
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: SentinelOne.Agent.Tags.sentinelone.key
+              operator: isEqualString
+              right:
+                value:
+                  simple: Unit
+          root: SentinelOne.Agent.Tags.sentinelone
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 3fcd41a0-b405-4b36-830e-feb1363ee923
+      iscommand: true
+      name: Set Agent Tag Value
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 3fcd41a0-b405-4b36-830e-feb1363ee923
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 545
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: RTIR_Constituency
+      value:
+        complex:
+          accessor: rt_key
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: DepartmentMap.sentinel_unit
+              operator: isEqualString
+              right:
+                iscontext: true
+                value:
+                  simple: incident.sentineloneunittag
+          root: DepartmentMap
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Set a value in context under the key you entered. If no value is entered, the script doesn't do anything.
+
+        This automation runs using the default Limited User role, unless you explicitly change the permissions.
+        For more information, see the section about permissions here:
+        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
+      id: 0ead51c9-090f-4efe-82d2-7d8b4ca00815
+      iscommand: false
+      name: Set constituency value based on unit tag
+      script: SetAndHandleEmpty
+      type: regular
+      version: -1
+    taskid: 0ead51c9-090f-4efe-82d2-7d8b4ca00815
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 895
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: DepartmentMap
+      value:
+        complex:
+          accessor: UW-DepartmentMap
+          root: lists
+          transformers:
+          - operator: ParseJSON
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: d1c4196a-a149-434a-8e07-1258665e671d
+      iscommand: false
+      name: Set UW-DepartmentMap Context key
+      script: Set
+      type: regular
+      version: -1
+    taskid: d1c4196a-a149-434a-8e07-1258665e671d
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 720
+        }
+      }
+  "5":
+    continueonerror: true
+    continueonerrortype: ""
+    fieldMapping:
+    - incidentfield: RTIR Incident Report Ticket ID
+      output:
+        simple: ${RTIR.Ticket.ID}
+    - incidentfield: RTIR Incident Report Link
+      output:
+        complex:
+          accessor: ID
+          root: RTIR.Ticket
+          transformers:
+          - args:
+              prefix:
+                value:
+                  simple: https://soc-rtir.uwaterloo.ca/RTIR/Display.html?id=
+              suffix: {}
+            operator: concat
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "26"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      customfields:
+        simple: How Reported=SentinelOne
+      queue:
+        complex:
+          root: RTIR_Constituency
+          transformers:
+          - args:
+              prefix:
+                value:
+                  simple: 'Incident Reports - '
+              suffix: {}
+            operator: concat
+      subject:
+        complex:
+          accessor: threatname
+          root: incident
+          transformers:
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.externalconfidence.[0]
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' threat on '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.devicename
+            operator: concat
+      text:
+        simple: ${incident.sentinelonelink}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Create new ticket on RTIR.
+      id: f0dc3999-61a0-42b8-8670-c2224917e2ad
+      iscommand: true
+      name: Create RTIR Ticket (Incident Report)
+      script: RTIR|||rtir-create-ticket
+      type: regular
+      version: -1
+    taskid: f0dc3999-61a0-42b8-8670-c2224917e2ad
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 1070
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      Incident:
+      - "15"
+      No Incident:
+      - "7"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c9a707ca-ef72-40ca-8298-c5bad8f290f8
+      iscommand: false
+      name: Acknowledge Incident
+      type: condition
+      version: -1
+    taskid: c9a707ca-ef72-40ca-8298-c5bad8f290f8
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 1420
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    form:
+      description: Provide Close Reason
+      expired: false
+      questions:
+      - defaultrows: []
+        fieldassociated: ""
+        gridcolumns: []
+        id: "0"
+        label: ""
+        labelarg:
+          simple: Provide Close Reason
+        options: []
+        optionsarg: []
+        placeholder: ""
+        readonly: false
+        required: true
+        tooltip: ""
+        type: shortText
+      - defaultrows: []
+        fieldassociated: ""
+        gridcolumns: []
+        id: "1"
+        label: ""
+        labelarg:
+          simple: Provide SentinelOne Verdict
+        options: []
+        optionsarg:
+        - {}
+        - simple: false_positive
+        - simple: suspicious
+        placeholder: ""
+        readonly: false
+        required: true
+        tooltip: ""
+        type: singleSelect
+      sender: ""
+      title: Provide Close Reason
+      totalanswers: 0
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    message:
+      bcc: null
+      body: null
+      cc: null
+      format: ""
+      methods: []
+      subject: null
+      timings:
+        completeafterreplies: 1
+        completeaftersla: false
+        completeafterv2: true
+        retriescount: 2
+        retriesinterval: 360
+      to: null
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: babfaf44-765f-4492-8858-e5dda3b0f1df
+      iscommand: false
+      name: Provide Close Reason
+      type: collection
+      version: -1
+    taskid: babfaf44-765f-4492-8858-e5dda3b0f1df
+    timertriggers: []
+    type: collection
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1595
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "10"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      status:
+        simple: resolved
+      ticket-id:
+        simple: ${incident.rtirincidentreportticketid}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Modify a ticket on RTIR.
+      id: 855f8020-3699-42eb-816c-d9191288a256
+      iscommand: true
+      name: Close RTIR Ticket
+      script: RTIR|||rtir-edit-ticket
+      type: regular
+      version: -1
+    taskid: 855f8020-3699-42eb-816c-d9191288a256
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1770
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "11"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      status:
+        simple: resolved
+      threat_ids:
+        simple: ${incident.dbotMirrorId}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: SentinelOne V2
+      description: Updates the incident status to a group of threats that match the
+        specified input filter. Relevant for API version 2.1.
+      id: 7d10da17-0560-4c7e-89ea-f3c1aa88663f
+      iscommand: true
+      name: Close SentinelOne Threat
+      script: SentinelOne V2|||sentinelone-update-threats-status
+      type: regular
+      version: -1
+    taskid: 7d10da17-0560-4c7e-89ea-f3c1aa88663f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2120
+        }
+      }
+  "10":
+    continueonerrortype: ""
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      threat_ids:
+        simple: ${incident.dbotMirrorId}
+      verdict:
+        simple: ${Provide Close Reason.Answers.1}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: SentinelOne V2
+      description: Updates the analyst verdict to a group of threats that match the
+        specified input filter. Relevant for API version 2.1.
+      id: ed809066-4338-4951-8a55-5d2b626216a3
+      iscommand: true
+      name: Set SentinelOne Threat Verdict
+      script: SentinelOne V2|||sentinelone-update-threats-verdict
+      type: regular
+      version: -1
+    taskid: ed809066-4338-4951-8a55-5d2b626216a3
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1945
+        }
+      }
+  "11":
+    continueonerrortype: ""
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.close.inv
+      id: 76e33df4-e35e-4d2d-894b-fc4810778215
+      iscommand: true
+      name: Close XSOAR investigation
+      script: Builtin|||closeInvestigation
+      type: regular
+      version: -1
+    taskid: 76e33df4-e35e-4d2d-894b-fc4810778215
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 2295
+        }
+      }
+  "13":
+    continueonerrortype: ""
+    form:
+      description: ""
+      expired: false
+      questions:
+      - defaultrows: []
+        fieldassociated: ""
+        gridcolumns: []
+        id: "0"
+        label: ""
+        labelarg:
+          simple: Provide reason for opening incident
+        options: []
+        optionsarg: []
+        placeholder: ""
+        readonly: false
+        required: true
+        tooltip: ""
+        type: shortText
+      - defaultrows: []
+        fieldassociated: ""
+        gridcolumns: []
+        id: "1"
+        label: ""
+        labelarg:
+          simple: Which XSOAR incident should this incident be linked to?
+        options: []
+        optionsarg:
+        - simple: '${foundIncidents.id} (${foundincidents.name}) '
+        - simple: Create new incident (New Parent)
+        placeholder: ""
+        readonly: false
+        required: true
+        tooltip: ""
+        type: singleSelect
+      sender: ""
+      title: Reason for opening incident
+      totalanswers: 0
+    id: "13"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    message:
+      bcc: null
+      body: null
+      cc: null
+      format: ""
+      methods: []
+      subject: null
+      timings:
+        completeafterreplies: 1
+        completeaftersla: false
+        completeafterv2: true
+        retriescount: 2
+        retriesinterval: 360
+      to: null
+    nexttasks:
+      '#none#':
+      - "16"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c4c029c6-32e3-4f66-80fd-59a1de7b7831
+      iscommand: false
+      name: Reason for opening incident
+      type: collection
+      version: -1
+    taskid: c4c029c6-32e3-4f66-80fd-59a1de7b7831
+    timertriggers: []
+    type: collection
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1770
+        }
+      }
+  "14":
+    continueonerrortype: ""
+    fieldMapping:
+    - incidentfield: RTIR Incident Ticket ID
+      output:
+        simple: ${RTIR.Ticket.[1].ID}
+    - incidentfield: RTIR Incident Link
+      output:
+        complex:
+          accessor: ID
+          root: RTIR.Ticket.[1]
+          transformers:
+          - args:
+              prefix:
+                value:
+                  simple: https://soc-rtir.uwaterloo.ca/RTIR/Display.html?id=
+              suffix: {}
+            operator: concat
+    id: "14"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "27"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      customfields:
+        simple: How Reported=SentinelOne
+      members:
+        simple: ${RTIR.Ticket.ID}
+      owner:
+        simple: ${incident.owner}
+      queue:
+        complex:
+          root: RTIR_Constituency
+          transformers:
+          - args:
+              prefix:
+                value:
+                  simple: 'Incidents - '
+              suffix: {}
+            operator: concat
+      subject:
+        complex:
+          accessor: threatname
+          root: incident
+          transformers:
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.externalconfidence.[0]
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' threat on '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.devicename
+            operator: concat
+      text:
+        simple: |-
+          ${Reason for opening incident.Answers.0},
+          ${demistoUrls.investigation}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Create new ticket on RTIR.
+      id: dfb8b761-b216-4cae-8d08-ee3921cb4f93
+      iscommand: true
+      name: Create RTIR Ticket (Incident)
+      script: RTIR|||rtir-create-ticket
+      type: regular
+      version: -1
+    taskid: dfb8b761-b216-4cae-8d08-ee3921cb4f93
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 2295
+        }
+      }
+  "15":
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "13"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      query:
+        simple: |-
+          type:"UW - SentinelOne Incident" and status:"Active"
+          and ${incident.deviceid} and ${incident.filesha1}
+      status:
+        simple: Active,Pending,
+      type:
+        simple: UW - SentinelOne Incident,
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Searches Demisto incidents. A summarized version of this scrips is avilable with the summarizedversion argument.
+
+        This automation runs using the default Limited User role, unless you explicitly change the permissions.
+        For more information, see the section about permissions here:
+        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
+      id: 25a8a4cd-9187-422f-8e23-1139e3bd7abe
+      iscommand: false
+      name: Search for Similar Incidents
+      script: SearchIncidentsV2
+      type: regular
+      version: -1
+    taskid: 25a8a4cd-9187-422f-8e23-1139e3bd7abe
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1595
+        }
+      }
+  "16":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Reason for opening incident.Questions.1
+          operator: isEqualString
+          right:
+            iscontext: true
+            value:
+              simple: Reason for opening incident.Answers.1
+      label: New Parent
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: Reason for opening incident.Questions.1
+          operator: isEqualString
+          right:
+            iscontext: true
+            value:
+              simple: Reason for opening incident.Answers.0
+      label: Make This Incident Child Incident
+    continueonerrortype: ""
+    id: "16"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      Make This Incident Child Incident:
+      - "19"
+      New Parent:
+      - "23"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2b7e132f-be0c-421c-816a-b7af9796b69c
+      iscommand: false
+      name: New Parent ticket required?
+      type: condition
+      version: -1
+    taskid: 2b7e132f-be0c-421c-816a-b7af9796b69c
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1945
+        }
+      }
+  "17":
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "20"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      action:
+        simple: link
+      incidentId:
+        simple: ${foundIncidents.id}
+      linkedIncidentIDs:
+        simple: ${foundIncidents.incidentLink}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.linkIncidents
+      id: 337803fe-4511-4e94-8e9d-0b131537624a
+      iscommand: true
+      name: Set Incident Ticket ID from Parent Incident (XSOAR)
+      script: Builtin|||linkIncidents
+      type: regular
+      version: -1
+    taskid: 337803fe-4511-4e94-8e9d-0b131537624a
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 497,
+          "y": 2336
+        }
+      }
+  "19":
+    continueonerrortype: ""
+    id: "19"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "17"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: ${foundIncidents.id}
+      value:
+        complex:
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: foundIncidents.id
+              operator: containsGeneral
+              right:
+                iscontext: true
+                value:
+                  simple: Reason for opening incident.Questions.1
+          root: foundIncidents.id
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Set a value in context under the key you entered.
+      id: 1f518f3c-ad9f-4771-8644-ef7c8eade95c
+      iscommand: false
+      name: Set RTIR Incident ID Field
+      script: Set
+      type: regular
+      version: -1
+    taskid: 1f518f3c-ad9f-4771-8644-ef7c8eade95c
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 497,
+          "y": 2215
+        }
+      }
+  "20":
+    continueonerrortype: ""
+    id: "20"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      member-of:
+        simple: ${incident.rtirincidentticketid}
+      ticket-id:
+        simple: ${incident.rtirincidentreportticketid}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Modify a ticket on RTIR.
+      id: 35f7f460-1784-4f05-8314-32cb1879084d
+      iscommand: true
+      name: Set Incident Ticket ID from Parent Incident (RTIR)
+      script: RTIR|||rtir-edit-ticket
+      type: regular
+      version: -1
+    taskid: 35f7f460-1784-4f05-8314-32cb1879084d
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 497,
+          "y": 2470
+        }
+      }
+  "21":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: value
+                filters:
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: SentinelOne.Agent.Tags.sentinelone.key
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: Unit
+                root: SentinelOne.Agent.Tags.sentinelone
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "21"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "22"
+      "yes":
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ac6b2459-ed47-4a0b-887b-7a77dfa4a6e5
+      iscommand: false
+      name: Agent Unit Tag available?
+      type: condition
+      version: -1
+    taskid: ac6b2459-ed47-4a0b-887b-7a77dfa4a6e5
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 370
+        }
+      }
+  "22":
+    continueonerrortype: ""
+    id: "22"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "25"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: RTIR_Constituency
+      value:
+        simple: Incident Reports
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Set a value in context under the key you entered. If no value is entered, the script doesn't do anything.
+
+        This automation runs using the default Limited User role, unless you explicitly change the permissions.
+        For more information, see the section about permissions here:
+        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
+      id: e8fc3572-378a-4a3d-86a7-42412eff3b4c
+      iscommand: false
+      name: Set constituency value based on no unit tag
+      script: SetAndHandleEmpty
+      type: regular
+      version: -1
+    taskid: e8fc3572-378a-4a3d-86a7-42412eff3b4c
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 895
+        }
+      }
+  "23":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: value
+                filters:
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: SentinelOne.Agent.Tags.sentinelone.key
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: Unit
+                root: SentinelOne.Agent.Tags.sentinelone
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "24"
+      "yes":
+      - "14"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f4ac0240-aecc-445e-8339-1d8479243611
+      iscommand: false
+      name: Agent Unit Tag available?
+      type: condition
+      version: -1
+    taskid: f4ac0240-aecc-445e-8339-1d8479243611
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1125,
+          "y": 2120
+        }
+      }
+  "24":
+    continueonerrortype: ""
+    fieldMapping:
+    - incidentfield: RTIR Incident Ticket ID
+      output:
+        simple: ${RTIR.Ticket.[1].ID}
+    - incidentfield: RTIR Incident Link
+      output:
+        complex:
+          accessor: ID
+          root: RTIR.Ticket.[1]
+          transformers:
+          - args:
+              prefix:
+                value:
+                  simple: https://soc-rtir.uwaterloo.ca/RTIR/Display.html?id=
+              suffix: {}
+            operator: concat
+    id: "24"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "27"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      customfields:
+        simple: How Reported=SentinelOne
+      members:
+        simple: ${RTIR.Ticket.ID}
+      owner:
+        simple: ${incident.owner}
+      queue:
+        simple: Incidents
+      subject:
+        complex:
+          accessor: threatname
+          root: incident
+          transformers:
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.externalconfidence.[0]
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' threat on '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.devicename
+            operator: concat
+      text:
+        simple: |-
+          ${Reason for opening incident.Answers.0},
+          ${demistoUrls.investigation}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Create new ticket on RTIR.
+      id: 91676c9c-7aed-45ee-846b-e988f1f00fdc
+      iscommand: true
+      name: Create RTIR Ticket (Incident)
+      script: RTIR|||rtir-create-ticket
+      type: regular
+      version: -1
+    taskid: 91676c9c-7aed-45ee-846b-e988f1f00fdc
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1339,
+          "y": 2295
+        }
+      }
+  "25":
+    continueonerrortype: ""
+    fieldMapping:
+    - incidentfield: RTIR Incident Report Ticket ID
+      output:
+        simple: ${RTIR.Ticket.ID}
+    - incidentfield: RTIR Incident Report Link
+      output:
+        complex:
+          accessor: ID
+          root: RTIR.Ticket
+          transformers:
+          - args:
+              prefix:
+                value:
+                  simple: https://soc-rtir.uwaterloo.ca/RTIR/Display.html?id=
+              suffix: {}
+            operator: concat
+    id: "25"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "26"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      customfields:
+        simple: How Reported=SentinelOne
+      queue:
+        simple: Incident Reports
+      subject:
+        complex:
+          accessor: threatname
+          root: incident
+          transformers:
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.externalconfidence.[0]
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: ' threat on '
+            operator: concat
+          - args:
+              prefix: {}
+              suffix:
+                iscontext: true
+                value:
+                  simple: incident.devicename
+            operator: concat
+      text:
+        simple: ${incident.sentinelonelink}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Create new ticket on RTIR.
+      id: 3abcde93-7c86-4379-880a-aed07fe56251
+      iscommand: true
+      name: Create RTIR Ticket (Incident Report)
+      script: RTIR|||rtir-create-ticket
+      type: regular
+      version: -1
+    taskid: 3abcde93-7c86-4379-880a-aed07fe56251
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1070
+        }
+      }
+  "26":
+    continueonerrortype: ""
+    id: "26"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      text:
+        simple: ${demistoUrls.investigation}
+      ticket-id:
+        simple: ${incident.rtirincidentreportticketid}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Add a comment to an existing ticket.
+      id: 537e57ac-5bf2-4cdb-8df8-f87d6ea52a1d
+      iscommand: true
+      name: Post XSOAR Link to comment section
+      script: RTIR|||rtir-add-comment
+      type: regular
+      version: -1
+    taskid: 537e57ac-5bf2-4cdb-8df8-f87d6ea52a1d
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 1245
+        }
+      }
+  "27":
+    continueonerrortype: ""
+    id: "27"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      text:
+        simple: ${demistoUrls.investigation}
+      ticket-id:
+        simple: ${RTIR.Ticket.[1].ID}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RTIR
+      description: Add a comment to an existing ticket.
+      id: a772642a-3d97-4557-8e85-bcd06f4ef9ee
+      iscommand: true
+      name: Post XSOAR Link to comment section
+      script: RTIR|||rtir-add-comment
+      type: regular
+      version: -1
+    taskid: a772642a-3d97-4557-8e85-bcd06f4ef9ee
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1125,
+          "y": 2470
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "16_23_New Parent": 0.52
+    },
+    "paper": {
+      "dimensions": {
+        "height": 2490,
+        "width": 1670,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
