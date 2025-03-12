@@ -102,7 +102,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#default#':
-      - "7"
+      - "8"
       "yes":
       - "3"
     note: false
@@ -233,9 +233,6 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
-    nexttasks:
-      '#none#':
-      - "8"
     note: false
     quietmode: 0
     separatecontext: false
@@ -255,8 +252,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 545
+          "x": 850,
+          "y": 465
         }
       }
   "8":
@@ -280,20 +277,20 @@ tasks:
     task:
       brand: Core REST API
       description: Delete Core incidents.
-      id: bbe135ac-10f6-48b4-8121-fca637620ddf
+      id: b9906157-0a88-4fe7-85bb-d36468951549
       iscommand: true
       name: Delete investigation
       script: Core REST API|||core-delete-incidents
       type: regular
       version: -1
-    taskid: bbe135ac-10f6-48b4-8121-fca637620ddf
+    taskid: b9906157-0a88-4fe7-85bb-d36468951549
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 720
+          "x": 490,
+          "y": 700
         }
       }
 version: -1
@@ -303,7 +300,7 @@ view: |-
     "paper": {
       "dimensions": {
         "height": 910,
-        "width": 810,
+        "width": 1180,
         "x": 50,
         "y": 50
       }
