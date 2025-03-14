@@ -47,6 +47,7 @@ tasks:
         }
       }
   "1":
+    continueonerror: true
     continueonerrortype: ""
     id: "1"
     ignoreworker: false
@@ -67,13 +68,13 @@ tasks:
     task:
       brand: ""
       description: Sends a HTTP request with advanced capabilities.
-      id: 1aa37da5-e2a7-4268-85ed-4cd50c504ef0
+      id: fa5411c6-6765-4192-8606-4315db96f49b
       iscommand: false
       name: Connect to vision server
       script: HttpV2
       type: regular
       version: -1
-    taskid: 1aa37da5-e2a7-4268-85ed-4cd50c504ef0
+    taskid: fa5411c6-6765-4192-8606-4315db96f49b
     timertriggers: []
     type: regular
     view: |-
