@@ -14,7 +14,6 @@ id: 77e137b7-d99b-4834-8130-996c1de16464
 inputs: []
 name: Vision server monitoring
 outputs: []
-quiet: true
 starttaskid: "0"
 tasks:
   "0":
