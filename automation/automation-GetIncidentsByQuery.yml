@@ -62,7 +62,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.39.21
+    itemVersion: 1.39.25
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -89,11 +89,10 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('GetIncidentsByQuery', 'start', __line__())
-  demisto.debug('pack name = Base, pack version = 1.39.21')
-
-
+  demisto.debug('pack name = Base, pack version = 1.39.25')
   import pickle
   import uuid
+
 
 
   ### GENERATED CODE ###: from GetIncidentsApiModule import *
@@ -356,7 +355,7 @@ script: |
                   "Filename": file_name,
                   "FileFormat": output_format,
               },
-          }
+          },
       }
 
 
