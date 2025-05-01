@@ -1,0 +1,171 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration",
+		"automation",
+		"playbook",
+		"classifier"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "Cleanup the incidents and indicators created by OnboardingIntegration\n\nThis automation runs using the default Limited User role, unless you explicitly change the permissions.\nFor more information, see the section about permissions here:\n- For Cortex XSOAR 6 see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.x/Cortex-XSOAR-Playbook-Design-Guide/Automations \n- For Cortex XSOAR 8 Cloud see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8/Cortex-XSOAR-Cloud-Documentation/Create-a-script\n- For Cortex XSOAR 8.7 On-prem see https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/8.7/Cortex-XSOAR-On-prem-Documentation/Create-a-script",
+				"name": "OnboardingCleanup",
+				"tags": []
+			}
+		],
+		"casefield": null,
+		"classifier": [
+			{
+				"description": "Classifies Onboarding integration incidents.",
+				"id": "OnboardingIntegration",
+				"name": "Onboarding Integration - Classifier"
+			},
+			{
+				"description": "Maps incoming Onboarding integration incident fields.",
+				"id": "OnboardingIntegration-mapper",
+				"name": "Onboarding Integration - Incoming Mapper"
+			}
+		],
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Gets the simulated reputation of the URL address.",
+						"name": "demo-url"
+					},
+					{
+						"description": "Gets the simulated reputation of the IP address.",
+						"name": "demo-ip"
+					},
+					{
+						"description": "Gets the simulated reputation of the file hash.",
+						"name": "demo-file"
+					},
+					{
+						"description": "Gets the simulated reputation of the email address.",
+						"name": "demo-email"
+					},
+					{
+						"description": "Gets the simulated reputation of the domain.",
+						"name": "demo-domain"
+					}
+				],
+				"description": "Creates mock email incidents using one of two randomly selected HTML templates. Textual content is randomly generated and defined to include some text (100 random words) and the following data (at least 5 of each data type): IP addresses, URLs, SHA-1 hashes, SHA-256 hashes, MD5 hashes, email addresses, domain names.",
+				"id": "OnboardingIntegration",
+				"name": "OnboardingIntegration"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": [
+			{
+				"description": "This playbook is part of the on-boarding experience, and focuses on phishing scenarios. To use this playbook, you'll need to enable the `on-boarding` integration and configure incidents of type `Phishing`. For more information, refer to the on-boarding walkthroughs in the help section.",
+				"name": "PhishingDemo-Onboarding"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"created": "2020-11-09T18:49:00Z",
+	"currentVersion": "1.1.9",
+	"defaultDataSource": {
+		"id": "",
+		"name": ""
+	},
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.39.25",
+			"name": "Base"
+		},
+		"Phishing": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "3.7.2",
+			"name": "Phishing"
+		},
+		"rasterize": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "2.1.1",
+			"name": "Rasterize"
+		}
+	},
+	"deprecated": false,
+	"description": "Creates mock email incidents using one of two randomly selected HTML templates. Textual content is randomly generated and defined to include some text (100 random words) and the following data (at least 5 of each data type): IP addresses, URLs, SHA-1 hashes, SHA-256 hashes, MD5 hashes, email addresses, domain names.",
+	"downloads": 2347,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"hybrid": false,
+	"id": "OnboardingIntegration",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/OnboardingIntegration/OnboardingIntegration_image.png",
+			"name": "OnboardingIntegration"
+		},
+		{
+			"imagePath": "content/packs/rasterize/Rasterize_image.png",
+			"name": "Rasterize"
+		}
+	],
+	"itemVersion": "1.1.9",
+	"keywords": [],
+	"legacy": true,
+	"modules": [],
+	"name": "OnboardingIntegration",
+	"packID": "OnboardingIntegration",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2025-04-08T21:22:30Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "3089368",
+	"videos": []
+}
