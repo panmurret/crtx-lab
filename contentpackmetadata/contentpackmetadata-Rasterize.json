@@ -25,24 +25,24 @@
 				"category": "Utilities",
 				"commands": [
 					{
-						"description": "Converts an image file to a PDF file.",
-						"name": "rasterize-image"
+						"description": "Converts an HTML file to an image file or a PDF file.",
+						"name": "rasterize-html"
 					},
 					{
 						"description": "Converts a PDF file to an image file.",
 						"name": "rasterize-pdf"
 					},
 					{
-						"description": "Converts an HTML file to an image file or a PDF file.",
-						"name": "rasterize-html"
+						"description": "Converts the contents of a URL to an image file or a PDF file.",
+						"name": "rasterize"
+					},
+					{
+						"description": "Converts an image file to a PDF file.",
+						"name": "rasterize-image"
 					},
 					{
 						"description": "Converts the body of an email to an image file or a PDF file.",
 						"name": "rasterize-email"
-					},
-					{
-						"description": "Converts the contents of a URL to an image file or a PDF file.",
-						"name": "rasterize"
 					}
 				],
 				"description": "Converts URLs, PDF files, and emails to an image file or PDF file.",
@@ -59,7 +59,7 @@
 		"wizard": null
 	},
 	"created": "2020-06-30T20:27:10Z",
-	"currentVersion": "2.0.37",
+	"currentVersion": "2.1.3",
 	"defaultDataSource": {
 		"id": "",
 		"name": ""
@@ -70,13 +70,13 @@
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.39.19",
+			"minVersion": "1.39.25",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "Converts URLs, PDF files, and emails to an image file or PDF file.",
-	"downloads": 69068,
+	"downloads": 69531,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -94,7 +94,7 @@
 			"name": "Rasterize"
 		}
 	],
-	"itemVersion": "2.0.37",
+	"itemVersion": "2.1.3",
 	"keywords": [],
 	"legacy": true,
 	"modules": [],
@@ -119,11 +119,13 @@
 		"email": "",
 		"url": "https://www.paloaltonetworks.com/cortex"
 	},
-	"tags": [],
+	"tags": [
+		"Trending"
+	],
 	"toServerVersion": "",
-	"updated": "2025-02-19T20:42:04Z",
+	"updated": "2025-04-16T20:35:27Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "2510529",
+	"versionInfo": "3201729",
 	"videos": []
 }
